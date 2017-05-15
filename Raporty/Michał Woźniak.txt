@@ -1,0 +1,6 @@
+scrum 15.05.2017 
+Zapoznanie siê z programem Qt Creator(stworzenie prostej aplikacji obs³uguj¹cej odczyt 
+i zapis do pliku, przyciski)
+
+Plany na jutro
+Rozpoczecie pracy z grafika (wczytywanie bitmap praca na nich)
