@@ -1,8 +1,12 @@
-15.05.2017
-Co zrobi³em?
-Przeczyta³em ponad 200 stron ksi¹¿ki Praty na temat C++
-Stworzy³em repozytorium git na komputerze.
-Zainstalowa³em QT Creatora i rozpocz¹³em w nim pracê.
+16.05.2017
+Co zrobiÄ™ dzisiaj?
+PrzeglÄ…dnÄ™ metodykÄ™ konwersji typÃ³w obrazÃ³w i stworzÄ™ ramÄ™ dla skryptu Å‚adowania grafiki
 
-Co bêdê robi³ jutro?
-Rozpoczne studiowanie techniki obróbki obrazu (bitmapy)
+15.05.2017
+Co zrobiÅ‚em?
+PrzeczytaÅ‚em ponad 200 stron ksiÅ¡Å¼ki Praty na temat C++
+StworzyÅ‚em repozytorium git na komputerze.
+ZainstalowaÅ‚em QT Creatora i rozpoczÅ¡Å‚em w nim pracÄ™.
+
+Co bÄ™dÄ™ robiÅ‚ jutro?
+Rozpoczne studiowanie techniki obrÃ³bki obrazu (bitmapy)
