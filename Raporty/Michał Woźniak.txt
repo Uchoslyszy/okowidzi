@@ -4,3 +4,12 @@ i zapis do pliku, przyciski)
 
 Plany na jutro
 Rozpoczecie pracy z grafika (wczytywanie bitmap praca na nich)
+
+
+16.05.2017
+
+Wczoraj: 
+-Prosta aplikacja w Qt creatorze
+
+Dzisiaj:
+-Biblioteka do obróbki grafik napisanie funkcji do wczytywania map bitowych
