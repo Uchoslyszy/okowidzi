@@ -13,3 +13,11 @@ Wczoraj:
 
 Dzisiaj:
 -Biblioteka do obróbki grafik napisanie funkcji do wczytywania map bitowych
+
+scrum 17.05.20
+
+Wczoraj
+-znalazlem biblioteke do obrobki grafiki na stronie http://www.partow.net/programming/bitmap/index.html
+
+Dzis
+-funkcja do importowania map bitowych
