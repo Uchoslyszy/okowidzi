@@ -1,15 +1,29 @@
 scrum 15.05.2017 
-Zapoznanie siê z programem Qt Creator(stworzenie prostej aplikacji obs³uguj¹cej odczyt 
-i zapis do pliku, przyciski)
+	Zapoznanie siê z programem Qt Creator(stworzenie prostej aplikacji obs³uguj¹cej odczyt 
+	i zapis do pliku, przyciski)
 
-Plany na jutro
-Rozpoczecie pracy z grafika (wczytywanie bitmap praca na nich)
+	Plany na jutro
+	Rozpoczecie pracy z grafika (wczytywanie bitmap praca na nich)
 
 
 16.05.2017
+	Wczoraj: 
+	-Prosta aplikacja w Qt creatorze
 
-Wczoraj: 
--Prosta aplikacja w Qt creatorze
+	Dzisiaj:
+	-Biblioteka do obróbki grafik napisanie funkcji do wczytywania map bitowych
 
-Dzisiaj:
--Biblioteka do obróbki grafik napisanie funkcji do wczytywania map bitowych
+17.05.20
+	Wczoraj:
+	-znalazlem biblioteke do obrobki grafiki na stronie http://www.partow.net/programming/bitmap/index.html
+
+	Dzisiaj:
+	-funkcja do importowania map bitowych
+
+18.05.2017
+	Wczoraj:
+	-funkcja do importowania do programu map bitowych (24 bity),
+
+	Dzisiaj:
+	-Funkcja tworz¹ca 16 s³upkowy histogram grayscalowego obrazka
+	-zamiana mapy na grayscale
