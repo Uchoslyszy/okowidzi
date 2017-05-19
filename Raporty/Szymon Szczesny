@@ -10,3 +10,8 @@
 18.05.2017 :
   DZISIAJ: Podjąłem próbę stworzenia interfejsu - graficznie już to wygląda.
   JUTRO  : Pouczę się o klasach w c++ aby rozwiązać trudności z zakodzeniem Buttonów i slotów pod obrazki ze względu na niewystarczającą wiedzę o klasach w cpp
+19.05.2017 :
+  DZISIAJ: Poprawiłem graficzny wygląd interfejsu (powiększyłem okno, poprzesuwałem trochę przycisków). 
+	   Pouczyłem się więcej o obsłudze Qt i klas/widgetów/funkcji w tym programie.
+	   Zaimplementowałem funkcje uruchamiające się po kliknięciu przycisku "Wczytaj obraz" - można wczytać wybrany z dysku obrazek
+  TRUDNOŚĆ:Dobranie odpowiedniej wielkości okna - ustawianie wielkości elementów interfejsu jest trochę głupio rozwiązane i sprawia kłopoty gdy ma się mały ekran
