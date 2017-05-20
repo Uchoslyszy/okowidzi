@@ -1,3 +1,21 @@
+20.05.2017
+Co zrobiłem wczoraj?
+Napisałem funkcję rozjaśniającą obraz
+Co zrobię dzisiaj?
+Commit zrobionej pracy oraz praca nad alteracją koloru obrazu.
+
+19.05.2017
+Co zrobiłem wczoraj?
+Napisałem program sczytujący obraz i tworzący histogram.
+Co zrobię dzisiaj?
+Napiszę funkcję rozjaśniającą obraz
+
+18.05.2017
+Co zrobiłem wczoraj?
+Commit biblioteki obrazów
+Co zrobię dzisiaj?
+Napiszę program zczytujący obraz i tworzący histogram
+
 17.05.2017
 Co zrobiłem wczoraj?
 Przeglądnąłem metodykę konwersji formatów obrazów
