@@ -13,4 +13,19 @@ Co zrobi³em wczoraj?
 Rozpocz¹³em studiowanie w celu stworzenia schematu kodu.
 
 Co zrobiê dzisiaj?
-Przestuidiujê biblioteki potrzebne do stworzenia funkcji do edycji zdjêæ.
+Przestuidiujê biblioteki potrzebne do stworzenia funkcji do edycji zdjêæ.>>>>>>> .r34
+
+(ze wzglêdu za wyjazd 2 commity jednego dnia)
+20.05.2017
+Co zrobi³em wczoraj?
+Przestudiowanie strony http://analizaobrazu.x25.pl/articles/11 i analiza biblioteki OpenCV.
+
+Co zrobiê dzisiaj?
+Stworzenie kodu.
+
+21.05.2017
+Co zrobi³em wczoraj?
+Stworzy³em funkcje filtruj¹ce.
+Co zrobiê dzisiaj?
+Commit pracy na github.
+
