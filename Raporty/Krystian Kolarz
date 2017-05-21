@@ -14,7 +14,17 @@ Zapoznałem sie z funkcjami programu QT ułatwiającymi tworzenie interfejsu.
 Co zrobię jutro?
 Zaprojektuje podstawowy intefejs do naszego programu.
 
+19.05.17r.
 Co zrobiłem? 
 Zrobiłem podstawową wersję programu.
 Co zrobię jutro?
 Poszerze moją wiedzę, aby dostoswać dodać odpowiednie elementy intefejsu do programu.
+
+21.05.2017 
+ Co zroibłem?
+  Dopracowałem interfejs graficzny 
+ Poszerzyłem wiedzę na temat QT i tworzeniu widgetów.
+ Zaimplementowałem funkcje uruchamiające się po kliknięciu przycisku "Wczytaj obraz" - można wczytać wybrany z dysku obrazek
+ 
+ Co zrobię jutro?
+Popracuje nad skalowaniem obrazu, gdyż jest problematyczny przy małych rozdzielczościach ekranu.
