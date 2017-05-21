@@ -1,0 +1,3 @@
+http://docs.opencv.org/master/df/d65/tutorial_table_of_content_introduction.html - instalacja
+
+http://docs.opencv.org/master/dc/dd3/tutorial_gausian_median_blur_bilateral_filter.html - tutorial do filtrów
