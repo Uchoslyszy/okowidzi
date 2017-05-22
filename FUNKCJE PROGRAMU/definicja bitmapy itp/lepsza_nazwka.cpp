@@ -2,6 +2,7 @@
 #include "bitmap_image.hpp"
 #include<stdlib.h>
 #include "imageheader.h"
+#include<math.h>
 
 
 
@@ -18,6 +19,60 @@ Picture::~Picture()
 
 }
 
+int Picture::filter(int filter_number,int mask_size)
+{
+    int r = floor(mask_size/2);
+    int weight;
+    int i,x,y,blue,red,green,j;
+    rgb_t color,add;
+
+    bitmap_image image2(width,height);
+    image2.copy_from(image);
+
+    int mask[mask_size][mask_size];
+    for(i=0;i<mask_size;i++)
+        for(j=0;j<mask_size;j++)
+            mask[i][j]=1;
+
+
+    for(y=0;y<width;y++)
+        for(x=0;x<height;x++)
+    {
+        blue=0;
+        red=0;
+        green=0;
+        weight=0;
+
+        for(i=0;i<mask_size;i++)
+            for(j=0;j<mask_size;j++)
+        {
+
+            if(y-r+i>-1&&y-r+i<width)
+                if(x-r+j>-1 && x-r+j <height)
+                {
+
+                    image2.get_pixel(y-r+i,x-r+j,color);
+
+                    blue=blue+color.blue;
+                    red=red+color.red;
+                    green=green+color.green;
+                    weight=weight+mask[i][j];
+
+                }
+
+        }
+
+
+        add.blue=blue/weight;
+        add.red=red/weight;
+        add.green=green/weight;
+
+        image.set_pixel(y,x,add);
+    }
+
+
+    return 0;
+}
 
 int Picture::image_open(std::string name)
 {
@@ -32,6 +87,9 @@ int Picture::image_open(std::string name)
     width=image.width();
     return 0;
 }
+
+
+
 
 int Picture::grayscaling()
 {
@@ -117,6 +175,8 @@ void Picture::lightening(int scale)
 
     }
 }
+
+
 
 int Picture::image_save(std::string path)
 {
