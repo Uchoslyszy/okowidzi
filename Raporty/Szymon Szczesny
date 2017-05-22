@@ -15,3 +15,8 @@
 	   Pouczyłem się więcej o obsłudze Qt i klas/widgetów/funkcji w tym programie.
 	   Zaimplementowałem funkcje uruchamiające się po kliknięciu przycisku "Wczytaj obraz" - można wczytać wybrany z dysku obrazek
   TRUDNOŚĆ:Dobranie odpowiedniej wielkości okna - ustawianie wielkości elementów interfejsu jest trochę głupio rozwiązane i sprawia kłopoty gdy ma się mały ekran
+22.05.2017 :
+  DZISIAJ: Ściągnąłem pliki wrzucone przez resztę zespołu na repozytorium i dołączyłem część z nich do głównego programu. Starałem się je połączyć.
+	   Postanowiłem posegregować pliki na repozytorium w odpowiednie foldery i rozpocząć system commitowania stanu kodu programu z dnia na dzień w osobnych folderach dla zapewnienia ciągłego dostępu do poprzednich wersji programu na wypadek poważnej awarii (czytaj: jakbym coś spieprzył).
+  JUTRO  : Ściągnę OpenCV i w dalszym ciągu będę łączył komponenty programu aby GUI i funkcje działały razem, ku chwale naszego programu.
+  TRUDNOŚĆ:Dopasowanie różnych elementów, zainstalowanie OpenCV.
