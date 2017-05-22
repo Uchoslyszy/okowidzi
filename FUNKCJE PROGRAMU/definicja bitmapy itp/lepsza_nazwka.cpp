@@ -23,16 +23,40 @@ int Picture::filter(int filter_number,int mask_size)
 {
     int r = floor(mask_size/2);
     int weight;
-    int i,x,y,blue,red,green,j;
+    int i,x,y,j,blue,red,green;
+
     rgb_t color,add;
 
     bitmap_image image2(width,height);
     image2.copy_from(image);
 
-    int mask[mask_size][mask_size];
+    double ** mask;
+
     for(i=0;i<mask_size;i++)
-        for(j=0;j<mask_size;j++)
+        mask[i] = new double[mask_size];
+
+    if(filter_number==1)
+    {
+        mask[0][0]=1;
+        mask[0][1]=2;
+        mask[0][2]=1;
+        mask[1][0]=2;
+        mask[1][1]=4;
+        mask[1][2]=2;
+        mask[2][0]=1;
+        mask[2][1]=2;
+        mask[2][2]=1;
+    }
+    if(filter_number==2)
+    {
+        for(i=0;i<mask_size;i++)
+            for(j=0;j<mask_size;j++)
             mask[i][j]=1;
+    }
+
+
+
+    //generate_gaussian(mask, mask_size);
 
 
     for(y=0;y<width;y++)
@@ -42,6 +66,7 @@ int Picture::filter(int filter_number,int mask_size)
         red=0;
         green=0;
         weight=0;
+
 
         for(i=0;i<mask_size;i++)
             for(j=0;j<mask_size;j++)
@@ -53,9 +78,9 @@ int Picture::filter(int filter_number,int mask_size)
 
                     image2.get_pixel(y-r+i,x-r+j,color);
 
-                    blue=blue+color.blue;
-                    red=red+color.red;
-                    green=green+color.green;
+                    blue=blue+color.blue*mask[i][j];
+                    red=red+color.red*mask[i][j];
+                    green=green+color.green*mask[i][j];
                     weight=weight+mask[i][j];
 
                 }
@@ -176,7 +201,11 @@ void Picture::lightening(int scale)
     }
 }
 
-
+int Picture::image_create(unsigned int width,unsigned int height)
+{
+    bitmap_image new_image(width,height);
+    image=new_image;
+}
 
 int Picture::image_save(std::string path)
 {
@@ -184,16 +213,46 @@ int Picture::image_save(std::string path)
     return 0;
 }
 
-int Picture::image_create(unsigned int width,unsigned int height)
-{
-    bitmap_image new_image(width,height);
-    image=new_image;
-}
 
 void array_clean(int * array_h)
 {
     int i;
     for(i=0;i<256;i++)
         array_h[i]=0;
+}
+
+void generate_gaussian(double ** matrix,int mask_size)
+{
+    double sigma=1;
+    double r,s = 2*sigma*sigma;
+
+    double sum;
+
+    int t = floor(mask_size/2);
+
+   // generate 5x5 kernel
+    for (int x = -t; x <= t; x++)
+    {
+        for(int y = -t; y <= t; y++)
+        {
+            r = sqrt(x*x + y*y);
+            matrix[x+t][y+t] = (exp(-(r*r)/s))/(M_PI * s);
+            sum += matrix[x+t][y+t];
+        }
+    }
+
+    // normalize the Kernel
+   for(int i = 0; i < mask_size; ++i)
+     for(int j = 0; j < mask_size; ++j)
+           matrix[i][j] /= sum;
+
+         for(int i = 0; i < mask_size; ++i)
+    {
+        for (int j = 0; j < mask_size; ++j)
+            std::cout<<matrix[i][j]<<"\t";
+        std::cout<<std::endl;
+    }
+
+
 }
 
