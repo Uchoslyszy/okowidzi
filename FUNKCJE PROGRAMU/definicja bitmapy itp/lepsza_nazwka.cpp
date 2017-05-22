@@ -4,12 +4,7 @@
 #include "imageheader.h"
 
 
-void array_clean(int * array_h)
-{
-    int i;
-    for(i=0;i<16;i++)
-        array_h[i]=0;
-}
+
 
 
 Picture::~Picture()
@@ -34,7 +29,7 @@ int Picture::image_open(std::string name)
     return 0;
 }
 
-bitmap_image Picture::grayscaling()
+int Picture::grayscaling()
 {
     rgb_t colour;
     rgb_t gray;
@@ -53,7 +48,7 @@ bitmap_image Picture::grayscaling()
 
     }
 
-    return image;
+    return 0;
 }
 
 
@@ -61,15 +56,8 @@ bitmap_image Picture::grayscaling()
 int Picture::generate_histogram()
 {
 
-
-    histogram = new int[16];
+    histogram = new int [255];
     array_clean(histogram);
-
-
-
-    unsigned int height = image.height();
-    unsigned int width = image.width();
-
 
 
 
@@ -79,44 +67,11 @@ int Picture::generate_histogram()
         rgb_t colour;
 
         image.get_pixel(x,y,colour);
-
-        if(colour.red<=16)
-            histogram[0]++;
-        else if(colour.red<=32 && colour.red>16)
-            histogram[1]++;
-        else if(colour.red<=48 && colour.red>32)
-            histogram[2]++;
-        else if(colour.red<=64 && colour.red>48)
-            histogram[3]++;
-        else if(colour.red<=80 && colour.red>64)
-            histogram[4]++;
-        else if(colour.red<=96 && colour.red>80)
-            histogram[5]++;
-        else if(colour.red<=112 && colour.red>96)
-            histogram[6]++;
-        else if(colour.red<=128 && colour.red>112)
-            histogram[7]++;
-        else if(colour.red<=144 && colour.red>128)
-            histogram[8]++;
-        else if(colour.red<=160 && colour.red>144)
-            histogram[9]++;
-        else if(colour.red<=176 && colour.red>160)
-            histogram[10]++;
-        else if(colour.red<=192 && colour.red>176)
-            histogram[11]++;
-        else if(colour.red<=208 && colour.red>192)
-            histogram[12]++;
-        else if(colour.red<=224 && colour.red>208)
-            histogram[13]++;
-        else if(colour.red<=240 && colour.red>224)
-            histogram[14]++;
-        else if(colour.red>=240)
-            histogram[15]++;
-
+        histogram[colour.red]++;
 
     }
 
-    return 1;
+    return 0;
 }
 
 void Picture::lightening(int scale)
@@ -158,20 +113,11 @@ int Picture::image_save(std::string path)
     return 0;
 }
 
-/*int main()
+
+void array_clean(int * array_h)
 {
-    Picture obrazek;
-    obrazek.image_open("input.bmp");
-    obrazek.grayscaling();
-    obrazek.generate_histogram();
-
-    obrazek.image_save("output.bmp");
-    obrazek.lightening(20);
-    obrazek.image_save("output2.bmp");
-
-
-    return 0;
-
-
+    int i;
+    for(i=0;i<255;i++)
+        array_h[i]=0;
 }
-*/
+
