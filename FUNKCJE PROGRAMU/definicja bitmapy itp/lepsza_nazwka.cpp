@@ -3,18 +3,46 @@
 #include<stdlib.h>
 #include "imageheader.h"
 
-bitmap_image grayscaling(bitmap_image image)
+
+void array_clean(int * array_h)
 {
-    unsigned int height = image.height();
-    unsigned int width = image.width();
+    int i;
+    for(i=0;i<16;i++)
+        array_h[i]=0;
+}
 
 
+Picture::~Picture()
+{
+    if(histogram!=NULL)
+        delete(histogram);
+
+}
+
+
+int Picture::image_open(std::string name)
+{
+    bitmap_image picture(name);
+    if(!picture)
+    {
+        printf("nie udalo sie wczytac obrazka");
+        return -1;
+    }
+    image=picture;
+    height=image.height();
+    width=image.width();
+    return 0;
+}
+
+bitmap_image Picture::grayscaling()
+{
+    rgb_t colour;
+    rgb_t gray;
 
     for(std::size_t y=0; y<height; y++)
         for(std::size_t x=0;x<width; x++)
     {
-        rgb_t colour;
-        rgb_t gray;
+
         image.get_pixel(x,y,colour);
         gray.red = (colour.red+colour.blue+colour.green)/3;
         gray.blue = (colour.red+colour.blue+colour.green)/3;
@@ -28,17 +56,12 @@ bitmap_image grayscaling(bitmap_image image)
     return image;
 }
 
-void array_clean(int * histogram)
-{
-    int i;
-    for(i=0;i<16;i++)
-        histogram[i]=0;
-}
 
-int * generate_histogram(bitmap_image image)
+
+int Picture::generate_histogram()
 {
 
-    int * histogram;
+
     histogram = new int[16];
     array_clean(histogram);
 
@@ -47,7 +70,7 @@ int * generate_histogram(bitmap_image image)
     unsigned int height = image.height();
     unsigned int width = image.width();
 
-    int pixel_count=0;
+
 
 
     for(std::size_t y=0; y<height; y++)
@@ -93,64 +116,62 @@ int * generate_histogram(bitmap_image image)
 
     }
 
-    return histogram;
+    return 1;
 }
 
-bitmap_image lightening (bitmap_image image, int scale)
+void Picture::lightening(int scale)
 {
-    unsigned int height =image.height();
-    unsigned int width = image.width();
+
+
+    rgb_t colour;
+    rgb_t brighter;
 
     for(std::size_t y=0; y<height; y++)
         for(std::size_t x=0;x<width; x++)
     {
-        rgb_t colour;
-        rgb_t brighter;
+
         image.get_pixel(x,y,colour);
 
         if (colour.red+scale<255 &&  colour.red+scale>0)
         brighter.red = colour.red +scale;
-        else if (colour.red+scale>0) brighter.red=255;
+        else if (colour.red+scale>255) brighter.red=255;
         else brighter.red=0;
 
         if (colour.blue+scale<255 &&  colour.blue+scale>0)
         brighter.blue = colour.blue +scale;
-        else if (colour.blue+scale>0) brighter.blue=255;
+        else if (colour.blue+scale>255) brighter.blue=255;
         else brighter.blue=0;
 
         if (colour.green+scale<255 &&  colour.green+scale>0)
         brighter.green = colour.green +scale;
-        else if (colour.green+scale>0) brighter.green=255;
+        else if (colour.green+scale>255) brighter.green=255;
         else brighter.green=0;
-
         image.set_pixel(x,y,brighter);
 
+
+    }
 }
 
-int main()
+int Picture::image_save(std::string path)
 {
-    int x;
-    unsigned int number=0;
-    int * histogram;
-    bitmap_image image("input.bmp");
-    if(!image)
-    {
-        std::cout << "cos nie wyszlo(obrazek sie nie wczytal) ";
-        return -1;
-    }
+    image.save_image(path);
+    return 0;
+}
 
-    image=grayscaling(image);
-    histogram=generate_histogram(image);
+/*int main()
+{
+    Picture obrazek;
+    obrazek.image_open("input.bmp");
+    obrazek.grayscaling();
+    obrazek.generate_histogram();
 
-    image.save_image("output.bmp");
-    for(x=0;x<16;x++)
-        printf("%i.: %i\n",x+1,histogram[x]);
+    obrazek.image_save("output.bmp");
+    obrazek.lightening(20);
+    obrazek.image_save("output2.bmp");
 
-    for(x=0;x<16;x++)
-        number=number+histogram[x];
 
-    printf("%i",number);
     return 0;
 
 
 }
+*/
