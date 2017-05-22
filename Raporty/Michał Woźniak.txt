@@ -34,3 +34,9 @@ scrum 15.05.2017
 	-histogram
 	Dzisiaj:
 	-poprawki w generowaniu histogramu
+
+22.05.2017 
+	Ostatnio:
+	-Poprawki w histogramie (256) pol i 3 kolory
+	Dzisiaj:
+	-wrzucienie wszystkich funkcji do klasy Picture by ulatwic dostep z poziomu interfejsu
