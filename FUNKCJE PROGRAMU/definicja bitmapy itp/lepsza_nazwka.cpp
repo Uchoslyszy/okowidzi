@@ -184,6 +184,11 @@ int Picture::image_save(std::string path)
     return 0;
 }
 
+int Picture::image_create(unsigned int width,unsigned int height)
+{
+    bitmap_image new_image(width,height);
+    image=new_image;
+}
 
 void array_clean(int * array_h)
 {

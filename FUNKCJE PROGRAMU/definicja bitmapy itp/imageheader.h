@@ -19,7 +19,7 @@ class Picture{
     public:
         int filter(int filter_number,int mask_size); //filter number picks up filter 1-Gaussian Blur
         int image_open(std::string name);//name-path for file to open \ errors:(-1 = cannot open file)
-
+        int image_create(unsigned int width,unsigned int height);
         int grayscaling();
         int generate_histogram();
         void lightening(int scale);//brightness gets scale value added not multiplied
