@@ -1,3 +1,9 @@
+22.05.2017
+Co zrobiłem wczoraj?
+Odpoczywałem bo weekend :)
+Co zrobię dzisiaj:
+Złożenie programu do kupy (implementacja filtrów do całościowego programu)
+
 20.05.2017
 Co zrobiłem wczoraj?
 Napisałem funkcję rozjaśniającą obraz
