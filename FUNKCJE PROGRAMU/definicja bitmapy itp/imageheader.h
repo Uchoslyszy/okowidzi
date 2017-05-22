@@ -4,14 +4,21 @@
 
 class Picture{
     private:
+        struct histogram
+        {
+            int * red;
+            int * blue;
+            int * green;
+        };
+
+        histogram histogram;
         bitmap_image image;
-        int * histogram;
         unsigned int height;
         unsigned int width;
 
     public:
         int image_open(std::string name);
-        bitmap_image grayscaling();
+        int grayscaling();
         int generate_histogram();
         void lightening(int scale);
         int image_save(std::string path);

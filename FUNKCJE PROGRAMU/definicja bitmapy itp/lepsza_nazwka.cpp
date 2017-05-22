@@ -9,8 +9,12 @@
 
 Picture::~Picture()
 {
-    if(histogram!=NULL)
-        delete(histogram);
+    if(histogram.red!=NULL)
+        delete(histogram.red);
+    if(histogram.blue!=NULL)
+        delete(histogram.red);
+    if(histogram.green!=NULL)
+        delete(histogram.red);
 
 }
 
@@ -56,8 +60,13 @@ int Picture::grayscaling()
 int Picture::generate_histogram()
 {
 
-    histogram = new int [255];
-    array_clean(histogram);
+
+    histogram.red = new int [256];
+    histogram.blue = new int [256];
+    histogram.green = new int [256];
+    array_clean(histogram.red);
+    array_clean(histogram.blue);
+    array_clean(histogram.green);
 
 
 
@@ -67,7 +76,9 @@ int Picture::generate_histogram()
         rgb_t colour;
 
         image.get_pixel(x,y,colour);
-        histogram[colour.red]++;
+        histogram.red[colour.red]++;
+        histogram.blue[colour.blue]++;
+        histogram.green[colour.green]++;
 
     }
 
@@ -117,7 +128,7 @@ int Picture::image_save(std::string path)
 void array_clean(int * array_h)
 {
     int i;
-    for(i=0;i<255;i++)
+    for(i=0;i<256;i++)
         array_h[i]=0;
 }
 
