@@ -20,3 +20,6 @@
 	   Postanowiłem posegregować pliki na repozytorium w odpowiednie foldery i rozpocząć system commitowania stanu kodu programu z dnia na dzień w osobnych folderach dla zapewnienia ciągłego dostępu do poprzednich wersji programu na wypadek poważnej awarii (czytaj: jakbym coś spieprzył).
   JUTRO  : Ściągnę OpenCV i w dalszym ciągu będę łączył komponenty programu aby GUI i funkcje działały razem, ku chwale naszego programu.
   TRUDNOŚĆ:Dopasowanie różnych elementów, zainstalowanie OpenCV.
+23.05.2017 :
+  DZISIAJ: Dogadaliśmy z chłopakami na zajęciach INPG kwestie łączenia programu w całość, kilka kwestii kosmetycznych i ustaliliśmy plan na przyszły sprint.
+  JUTRO  : Ściągnę OpenCV i w dalszym ciągu będę łączył komponenty programu aby GUI i funkcje działały razem, ku chwale naszego programu.
