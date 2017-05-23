@@ -29,3 +29,8 @@ Stworzy³em funkcje filtruj¹ce.
 Co zrobiê dzisiaj?
 Commit pracy na github.
 
+23.05.2017
+Co zrobi³em wczoraj?
+Zapoznanie siê z commitami innych cz³onków zespo³u.
+Co zrobi³em dzisiaj?
+Analiza kompatybilnoœci funkcji filtruj¹cych z reszt¹ programu.
