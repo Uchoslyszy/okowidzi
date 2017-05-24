@@ -47,4 +47,10 @@ scrum 15.05.2017
 	Dzisiaj:
 	-Port klasy na Qt image
 
+24.05.2017
+	Wczoraj:
+	-Port klasy Picture na QT image
+	Dzisiaj:
+	-poprawki w klasie Picture
+
 	
