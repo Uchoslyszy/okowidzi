@@ -40,3 +40,11 @@ scrum 15.05.2017
 	-Poprawki w histogramie (256) pol i 3 kolory
 	Dzisiaj:
 	-wrzucienie wszystkich funkcji do klasy Picture by ulatwic dostep z poziomu interfejsu
+
+23.05.2017
+	Wczoraj:
+	-klasa Picture
+	Dzisiaj:
+	-Port klasy na Qt image
+
+	
