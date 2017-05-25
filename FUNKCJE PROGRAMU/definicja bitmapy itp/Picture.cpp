@@ -5,6 +5,7 @@
 #include<QImage>
 #include<QRgb>
 #include<QString>
+#include<cmath>
 
 
 Picture::Picture(const QString name)
@@ -21,7 +22,7 @@ Picture::Picture()
 
 Picture::Picture(int width,int height,QImage::Format format)
 {
-    QImage image(width,height,format);
+    new (&image)QImage(width,height,format);
     height=image.height();
     width=image.width();
 }
@@ -38,16 +39,32 @@ Picture::~Picture()
 
 }
 
-/*int Picture::imagefilter(int filter_number,int mask_size)
+int Picture::Width()
+{
+    return width;
+}
+
+int Picture::Height()
+{
+    return height;
+}
+
+QImage::Format Picture::format()
+{
+    return image.format();
+}
+
+int Picture::imageFilter(int filter_number,int mask_size,double sigma)
 {
     int r = floor(mask_size/2);
-    int weight;
-    int i,x,y,j,blue,red,green;
 
-    rgb_t color;
+    int i,x,y,j,count;
+    double blue,red,green,weight;
 
-    QImage image2(width,height);
-    image2.copy_from(image);
+    QRgb color;
+
+    Picture image2(image.width(),image.height(),image.format());
+    image2.imageCopy(image.width(),image.height(),*this);
 
     double ** mask;
     mask = new double*[mask_size];
@@ -56,18 +73,12 @@ Picture::~Picture()
 
     if(filter_number==1)
     {
-        /*
-        mask[0][0]=1;
-        mask[0][1]=2;
-        mask[0][2]=1;
-        mask[1][0]=2;
-        mask[1][1]=4;
-        mask[1][2]=2;
-        mask[2][0]=1;
-        mask[2][1]=2;
-        mask[2][2]=1;
-        *//*
-        generateGaussian(mask,mask_size);
+
+        if(generateGaussian(mask,mask_size,sigma)==-1)
+        {
+            std::cout << "zly rozmiar maski dla filtra gausowskiego";
+            return -1;
+        }
     }
     if(filter_number==2)
     {
@@ -76,10 +87,11 @@ Picture::~Picture()
             mask[i][j]=1;
     }
 
-
-
-
-
+    if(filter_number==3)
+    {
+        (*this).pixelizeFilter(mask_size,image2);
+        return 0;
+    }
 
     for(y=0;y<width;y++)
         for(x=0;x<height;x++)
@@ -98,11 +110,11 @@ Picture::~Picture()
                 if(x-r+j>-1 && x-r+j <height)
                 {
 
-                    image2.pixel(y-r+i,x-r+j,color);
+                    color=image2.image.pixel(y-r+i,x-r+j);
 
-                    blue=blue+color.blue*mask[i][j];
-                    red=red+color.red*mask[i][j];
-                    green=green+color.green*mask[i][j];
+                    blue=blue+qBlue(color)*mask[i][j];
+                    red=red+qRed(color)*mask[i][j];
+                    green=green+qGreen(color)*mask[i][j];
                     weight=weight+mask[i][j];
 
                 }
@@ -110,16 +122,21 @@ Picture::~Picture()
         }
 
 
-        add.blue=blue/weight;
-        add.red=red/weight;
-        add.green=green/weight;
 
-        image.set_pixel(y,x,add);
+        blue=floor(blue/weight);
+        red=floor(red/weight);
+        green=floor(green/weight);
+
+
+
+        image.setPixelColor(y,x,qRgb(red,green,blue));
     }
-
+    for(i=0;i<mask_size;i++)
+        delete(mask[i]);
+    delete(mask);
 
     return 0;
-}*/
+}
 
 int Picture::imageOpen(const QString name)
 {
@@ -252,55 +269,240 @@ void array_clean(int * array_h)
 
 
 
-
-
-void generateGaussian(double ** matrix,int mask_size)
+int generateGaussian(double ** matrix,int mask_size,double sigma)
 {
-    double sigma=1;
+
+    if(mask_size%2==0)
+    {
+        std::cout << "nie mozna utworzyc maski o parzystej wielkosci";
+                     return -1;
+    }
+
+
+
     double r,s = 2*sigma*sigma;
 
-    double sum;
+    double sum=0;
+
+
 
     int t = floor(mask_size/2);
 
 
 
-    for (int x = -t; x <= t; x++)
-    {
-        for(int y = -t; y <= t; y++)
+
+        for (int x = -t; x <= t; x++)
         {
-            r = sqrt(x*x + y*y);
-            matrix[x+t][y+t] = (exp(-(r*r)/s))/(M_PI * s);
-            sum += matrix[x+t][y+t];
+            for(int y = -t; y <= t; y++)
+            {
+                r = sqrt(x*x + y*y);
+               matrix[x+t][y+t] = (exp(-(r*r)/s))/(M_PI * s);
+
+                sum += matrix[x+t][y+t];
+
+            }
         }
-    }
+
+
+
+
 
 
    for(int i = 0; i < mask_size; ++i)
      for(int j = 0; j < mask_size; ++j)
-           matrix[i][j] /= sum;
+         {
 
-    for(int i = 0; i < mask_size; ++i)
-    {
-        for (int j = 0; j < mask_size; ++j)
-            std::cout<<matrix[i][j]<<"\t";
-        std::cout<<std::endl;
-    }
+              matrix[i][j] = matrix[i][j]/sum;
+
+        }
+
+
+
+    return 0;
 
 
 }
 
-void Picture::imageCopy(int width,int height,Picture image,Picture new_image)
+
+void Picture::imageCopy(int width,int height,Picture image2)
 {
     QRgb color;
 
     for(size_t x=0;x<width;x++)
         for(size_t y=0;y<height;y++)
         {
-            color=image.image.pixel(x,y);
-            new_image.image.setPixelColor(x,y,color);
+            color=image2.image.pixel(x,y);
+            image.setPixelColor(x,y,color);
          }
 
+
+
+}
+
+void Picture::pixelizeFilter(int mask_size,Picture image2)
+{
+    int r = floor(mask_size/2);
+
+    int i,x,y,j,count;
+    double blue,red,green,weight;
+
+    QRgb color;
+        y=0;
+        while(y<width)
+        {
+            x=0;
+            while(x<height)
+        {
+            blue=0;
+            red=0;
+            green=0;
+            weight=0;
+            count =0;
+
+
+            for(i=0;i<mask_size;i++)
+                for(j=0;j<mask_size;j++)
+            {
+
+                if(y-r+i>-1&&y-r+i<width)
+                    if(x-r+j>-1 && x-r+j <height)
+                    {
+
+                        color=image2.image.pixel(y-r+i,x-r+j);
+
+                        blue=blue+qBlue(color);
+                        red=red+qRed(color);
+                        green=green+qGreen(color);
+                        count++;
+
+                    }
+
+            }
+
+
+
+            blue=floor(blue/(count));
+            red=floor(red/(count));
+            green=floor(green/(count));
+
+
+            for(i=0;i<mask_size;i++)
+                for(j=0;j<mask_size;j++)
+            {
+
+                if(y-r+i>-1&&y-r+i<width)
+                    if(x-r+j>-1 && x-r+j <height)
+                    {
+
+                        image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
+
+                    }
+
+            }
+
+
+           x+=mask_size;
+           if(x>height-1)
+           {
+               blue=0;
+               red=0;
+               green=0;
+               weight=0;
+               count =0;
+               for(i=0;i<mask_size;i++)
+                   for(j=0;j<mask_size;j++)
+               {
+
+                   if(y-r+i>-1&&y-r+i<width)
+                       if(x-r+j>-1 && x-r+j <height)
+                       {
+
+                           color=image2.image.pixel(y-r+i,x-r+j);
+
+                           blue=blue+qBlue(color);
+                           red=red+qRed(color);
+                           green=green+qGreen(color);
+                           count++;
+
+                       }
+
+               }
+
+
+
+               blue=floor(blue/(count));
+               red=floor(red/(count));
+               green=floor(green/(count));
+
+
+               for(i=0;i<mask_size;i++)
+                   for(j=0;j<mask_size;j++)
+               {
+
+                   if(y-r+i>-1&&y-r+i<width)
+                       if(x-r+j>-1 && x-r+j <height)
+                       {
+
+                           image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
+
+                       }
+
+               }
+           }
+
+
+
+        }
+            y+=mask_size;
+            if(y>width-1)
+            {
+                blue=0;
+                red=0;
+                green=0;
+                weight=0;
+                count =0;
+                for(i=0;i<mask_size;i++)
+                    for(j=0;j<mask_size;j++)
+                {
+
+                    if(y-r+i>-1&&y-r+i<width)
+                        if(x-r+j>-1 && x-r+j <height)
+                        {
+
+                            color=image2.image.pixel(y-r+i,x-r+j);
+
+                            blue=blue+qBlue(color);
+                            red=red+qRed(color);
+                            green=green+qGreen(color);
+                            count++;
+
+                        }
+
+                }
+
+
+
+                blue=floor(blue/(count));
+                red=floor(red/(count));
+                green=floor(green/(count));
+
+
+                for(i=0;i<mask_size;i++)
+                    for(j=0;j<mask_size;j++)
+                {
+
+                    if(y-r+i>-1&&y-r+i<width)
+                        if(x-r+j>-1 && x-r+j <height)
+                        {
+
+                            image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
+
+                        }
+
+                }
+            }
+
+        }
 
 
 }
