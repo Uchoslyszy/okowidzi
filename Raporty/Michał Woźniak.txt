@@ -52,5 +52,11 @@ scrum 15.05.2017
 	-Port klasy Picture na QT image
 	Dzisiaj:
 	-poprawki w klasie Picture
-
+25.05.2017
+	Wczoraj:
+	-poprawki w klasie Picutre
+	Dzisiaj
+	-Filtr pixelujacy 
+	-generator macirzy gaussowskich
+	-filtry dodane do biblioteki
 	
