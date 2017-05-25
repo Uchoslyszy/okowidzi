@@ -4,7 +4,7 @@
 #include "imageheader.h"
 #include<math.h>
 
-
+// pamiętajcie że Picture z dużych liter piszemy :)
 
 
 
