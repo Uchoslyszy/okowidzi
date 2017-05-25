@@ -34,3 +34,23 @@ scrum 15.05.2017
 	-histogram
 	Dzisiaj:
 	-poprawki w generowaniu histogramu
+
+22.05.2017 
+	Ostatnio:
+	-Poprawki w histogramie (256) pol i 3 kolory
+	Dzisiaj:
+	-wrzucienie wszystkich funkcji do klasy Picture by ulatwic dostep z poziomu interfejsu
+
+23.05.2017
+	Wczoraj:
+	-klasa Picture
+	Dzisiaj:
+	-Port klasy na Qt image
+
+24.05.2017
+	Wczoraj:
+	-Port klasy Picture na QT image
+	Dzisiaj:
+	-poprawki w klasie Picture
+
+	

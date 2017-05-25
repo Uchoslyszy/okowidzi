@@ -17,11 +17,13 @@ class Picture{
         unsigned int width;
 
     public:
-        int image_open(std::string name);
+        int filter(int filter_number,int mask_size); //filter number picks up filter 1-Gaussian Blur
+        int image_open(std::string name);//name-path for file to open \ errors:(-1 = cannot open file)
+        int image_create(unsigned int width,unsigned int height);
         int grayscaling();
         int generate_histogram();
-        void lightening(int scale);
-        int image_save(std::string path);
+        void lightening(int scale);//brightness gets scale value added not multiplied
+        int image_save(std::string path);//path-path for file to save in
         ~Picture();
 };
 
