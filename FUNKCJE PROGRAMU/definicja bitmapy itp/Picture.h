@@ -38,7 +38,7 @@ class Picture{
                 3. Pixelize(mask size chooses new pixel size)
         */
 
-        void Picture::contrast (int set);
+        void contrast (int set);
         void lightening(int scale);//brightness gets scale value added not multiplied
         void imageCopy(int width, int height, Picture image);
         int imageOpen(const QString name);//name-path for file to open \ errors:(-1 = cannot open file)
