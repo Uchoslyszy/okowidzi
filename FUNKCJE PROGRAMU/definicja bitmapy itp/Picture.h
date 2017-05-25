@@ -30,13 +30,15 @@ class Picture{
         void grayscaling();
         void generateHistogram();
         void printHistogram();
+        void pixelizeFilter(int mask_size,Picture image2);
         int imageFilter(int filter_number,int mask_size,double sigma); //(filter number, size of the mask(has to be an odd number),sigma value(for gaussian blur))
         /*filters:
                 1. Gaussian blur
                 2. Equal blur
                 3. Pixelize(mask size chooses new pixel size)
         */
-        void pixelizeFilter(int mask_size,Picture image2);
+
+        void Picture::contrast (int set);
         void lightening(int scale);//brightness gets scale value added not multiplied
         void imageCopy(int width, int height, Picture image);
         int imageOpen(const QString name);//name-path for file to open \ errors:(-1 = cannot open file)
