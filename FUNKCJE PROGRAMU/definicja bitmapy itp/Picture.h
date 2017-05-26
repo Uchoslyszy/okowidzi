@@ -31,6 +31,7 @@ class Picture{
         void grayscaling();
         void generateHistogram();
         void printHistogram();
+        void contrast (int set);
         void medianFilter(int mask_size);
         void pixelizeFilter(int mask_size);
         int gaussianBlur(int mask_size,double sigma);
