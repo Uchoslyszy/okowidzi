@@ -32,7 +32,8 @@ class Picture{
         void printHistogram();
         void medianFilter(int mask_size);
         void pixelizeFilter(int mask_size);
-        int imageFilter(int filter_number,int mask_size,double sigma); //(filter number, size of the mask(has to be an odd number),sigma value(for gaussian blur))
+        int gaussianBlur(int mask_size,double sigma);
+        int equalFilter(int mask_size); //(filter number, size of the mask(has to be an odd number),sigma value(for gaussian blur))
         /*filters:
                 1. Gaussian blur
                 2. Equal blur

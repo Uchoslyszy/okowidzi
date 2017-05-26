@@ -56,7 +56,7 @@ QImage::Format Picture::format()
     return image.format();
 }
 
-int Picture::imageFilter(int filter_number,int mask_size,double sigma)
+int Picture::equalFilter(int mask_size)
 {
     int r = floor(mask_size/2);
 
@@ -73,21 +73,16 @@ int Picture::imageFilter(int filter_number,int mask_size,double sigma)
     for(i=0;i<mask_size;i++)
         mask[i] = new double[mask_size];
 
-    if(filter_number==1)
-    {
 
-        if(generateGaussian(mask,mask_size,sigma)==-1)
-        {
-            std::cout << "zly rozmiar maski dla filtra gausowskiego";
-            return -1;
-        }
-    }
-    if(filter_number==2)
-    {
+
+
+
+
+
         for(i=0;i<mask_size;i++)
             for(j=0;j<mask_size;j++)
             mask[i][j]=1;
-    }
+
 
 
 
@@ -148,6 +143,74 @@ int Picture::imageOpen(const QString name)
 }
 
 
+int Picture::gaussianBlur(int mask_size,double sigma)
+{
+    int r = floor(mask_size/2);
+
+    int i,x,y,j;
+    double blue,red,green,weight;
+
+    QRgb color;
+
+    Picture image2(image.width(),image.height(),image.format());
+    image2.imageCopy(image.width(),image.height(),*this);
+
+    double ** mask;
+    mask = new double*[mask_size];
+    for(i=0;i<mask_size;i++)
+        mask[i] = new double[mask_size];
+
+
+    if(generateGaussian(mask,mask_size,sigma)==-1)
+    {
+        std::cout << "zly rozmiar maski dla filtra gausowskiego";
+        return -1;
+    }
+
+    for(y=0;y<width;y++)
+        for(x=0;x<height;x++)
+    {
+        blue=0;
+        red=0;
+        green=0;
+        weight=0;
+
+
+        for(i=0;i<mask_size;i++)
+            for(j=0;j<mask_size;j++)
+        {
+
+            if(y-r+i>-1&&y-r+i<width)
+                if(x-r+j>-1 && x-r+j <height)
+                {
+
+                    color=image2.image.pixel(y-r+i,x-r+j);
+
+                    blue=blue+qBlue(color)*mask[i][j];
+                    red=red+qRed(color)*mask[i][j];
+                    green=green+qGreen(color)*mask[i][j];
+                    weight=weight+mask[i][j];
+
+                }
+
+        }
+
+
+
+        blue=floor(blue/weight);
+        red=floor(red/weight);
+        green=floor(green/weight);
+
+
+
+        image.setPixelColor(y,x,qRgb(red,green,blue));
+    }
+    for(i=0;i<mask_size;i++)
+        delete(mask[i]);
+    delete(mask);
+
+    return 0;
+}
 
 
 void Picture::grayscaling()
