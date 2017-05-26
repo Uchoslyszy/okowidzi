@@ -59,4 +59,11 @@ scrum 15.05.2017
 	-Filtr pixelujacy 
 	-generator macirzy gaussowskich
 	-filtry dodane do biblioteki
+
+26.05.2017
+	Wczoraj:
+	-filtry dodane do biblioteki
+	-Filtr pixelujacy 
+	Dzisiaj:
+	-memgenerator
 	
