@@ -26,6 +26,7 @@ class Picture{
         int Width();
         int Height();
         QImage::Format format();
+        QImage imagePointer();
 
         void grayscaling();
         void generateHistogram();

@@ -15,11 +15,16 @@ Picture::Picture(const QString name)
     image.load(name);
     height=image.height();
     width=image.width();
+    histogram.blue=new int[256];
+    histogram.red=new int[256];
+    histogram.green=new int[256];
 }
 
 Picture::Picture()
 {
-
+    histogram.blue=new int[256];
+    histogram.red=new int[256];
+    histogram.green=new int[256];
 }
 
 Picture::Picture(int width,int height,QImage::Format format)
@@ -27,6 +32,9 @@ Picture::Picture(int width,int height,QImage::Format format)
     new (&image)QImage(width,height,format);
     height=image.height();
     width=image.width();
+    histogram.blue=new int[256];
+    histogram.red=new int[256];
+    histogram.green=new int[256];
 }
 
 
@@ -402,6 +410,11 @@ void Picture::imageCopy(int width,int height,Picture image2)
 
 }
 
+QImage Picture::imagePointer()
+{
+    return image;
+}
+
 void Picture::pixelizeFilter(int mask_size)
 {
 
@@ -657,8 +670,8 @@ void Picture::medianFilter(int mask_size)
     values_red = new double[mask_size*mask_size];
 
 
-    Picture image2(image.width(),image.height(),image.format());
-    image2.imageCopy(image.width(),image.height(),*this);
+    Picture image2(width,height,this->format());
+    image2.imageCopy(width,height,*this);
 
     for(y=0;y<width;y++)
         for(x=0;x<height;x++)
@@ -700,8 +713,11 @@ void Picture::medianFilter(int mask_size)
 
 
 
-        image.setPixelColor(y,x,qRgb(red,green,blue));
+        this->image.setPixelColor(y,x,qRgb(red,green,blue));
     }
+    delete(values_blue);
+    delete(values_green);
+    delete(values_red);
 }
 
 void arraySort(double * values,int size)
