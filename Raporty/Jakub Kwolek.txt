@@ -1,3 +1,15 @@
+27.06.2017
+Co zrobiłem wczoraj?
+Sporządziłem listę możliwych ulepszeń
+Co zrobię dzisiaj?
+Rozpocznę pracę nad wdrażaniem tych ulepszeń
+
+26.05.2017
+Co zrobiłem wczoraj?
+Zaplecze programu zostało dokończone, gotowe do połączenia z GUI
+Co zrobię dzisiaj?
+Poszukam opcji by zacząć pracę nad ulepszaniem programu.
+
 25.05.2017
 Co zrobiłem wczoraj?
 Funkcję kontrastu
