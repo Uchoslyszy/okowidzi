@@ -81,20 +81,9 @@ int Picture::equalFilter(int mask_size)
     for(i=0;i<mask_size;i++)
         mask[i] = new double[mask_size];
 
-
-
-
-
-
-
         for(i=0;i<mask_size;i++)
             for(j=0;j<mask_size;j++)
             mask[i][j]=1;
-
-
-
-
-
 
     for(y=0;y<width;y++)
         for(x=0;x<height;x++)
@@ -104,46 +93,35 @@ int Picture::equalFilter(int mask_size)
         green=0;
         weight=0;
 
-
         for(i=0;i<mask_size;i++)
             for(j=0;j<mask_size;j++)
         {
-
             if(y-r+i>-1&&y-r+i<width)
                 if(x-r+j>-1 && x-r+j <height)
                 {
-
                     color=image2.image.pixel(y-r+i,x-r+j);
 
                     blue=blue+qBlue(color)*mask[i][j];
                     red=red+qRed(color)*mask[i][j];
                     green=green+qGreen(color)*mask[i][j];
                     weight=weight+mask[i][j];
-
                 }
-
         }
-
-
 
         blue=floor(blue/weight);
         red=floor(red/weight);
         green=floor(green/weight);
-
-
 
         image.setPixelColor(y,x,qRgb(red,green,blue));
     }
     for(i=0;i<mask_size;i++)
         delete(mask[i]);
     delete(mask);
-
     return 0;
 }
 
 int Picture::imageOpen(const QString name)
 {
-
     image.load(name);
     height=image.height();
     width=image.width();
@@ -187,29 +165,21 @@ int Picture::gaussianBlur(int mask_size,double sigma)
         for(i=0;i<mask_size;i++)
             for(j=0;j<mask_size;j++)
         {
-
             if(y-r+i>-1&&y-r+i<width)
                 if(x-r+j>-1 && x-r+j <height)
                 {
-
                     color=image2.image.pixel(y-r+i,x-r+j);
 
                     blue=blue+qBlue(color)*mask[i][j];
                     red=red+qRed(color)*mask[i][j];
                     green=green+qGreen(color)*mask[i][j];
                     weight=weight+mask[i][j];
-
                 }
-
-        }
-
-
+         }
 
         blue=floor(blue/weight);
         red=floor(red/weight);
         green=floor(green/weight);
-
-
 
         image.setPixelColor(y,x,qRgb(red,green,blue));
     }
@@ -230,7 +200,6 @@ void Picture::contrast (int set)
     for(std::size_t y=0; y<height; y++)
         for(std::size_t x=0;x<width; x++)
     {
-
         color=image.pixel(x,y);
 
         if (set*(qRed(color)-178)+178<=255 &&  set*(qRed(color)-178)+178>0)
@@ -250,8 +219,6 @@ void Picture::contrast (int set)
         else g=0;
 
         image.setPixelColor(x,y,qRgb(r,g,b));
-
-
     }
 }
 
@@ -275,11 +242,7 @@ void Picture::grayscaling()
         gray=(r+b+g)/3;
 
         image.setPixelColor(x,y,qRgb(gray,gray,gray));
-
-
     }
-
-
 }
 
 void Picture::printHistogram()
@@ -293,8 +256,6 @@ void Picture::printHistogram()
 
 void Picture::generateHistogram()
 {
-
-
     histogram.red = new int [256];
     histogram.blue = new int [256];
     histogram.green = new int [256];
@@ -322,8 +283,6 @@ void Picture::generateHistogram()
 
 void Picture::lightening(int scale)
 {
-
-
     QRgb color;
 
     int r;
@@ -333,7 +292,6 @@ void Picture::lightening(int scale)
     for(std::size_t y=0; y<height; y++)
         for(std::size_t x=0;x<width; x++)
     {
-
         color=image.pixel(x,y);
 
         if (qRed(color)+scale<=255 &&  qRed(color)+scale>0)
@@ -351,10 +309,7 @@ void Picture::lightening(int scale)
         else if (qGreen(color)+scale>255)g= 255;
         else  g= 0;
 
-
         image.setPixelColor(x,y,qRgb(r,g,b));
-
-
     }
 }
 
@@ -377,25 +332,17 @@ void array_clean(int * array_h)
 
 int generateGaussian(double ** matrix,int mask_size,double sigma)
 {
-
     if(mask_size%2==0)
     {
         std::cout << "nie mozna utworzyc maski o parzystej wielkosci";
                      return -1;
     }
 
-
-
     double r,s = 2*sigma*sigma;
 
     double sum=0;
 
-
-
     int t = floor(mask_size/2);
-
-
-
 
         for (int x = -t; x <= t; x++)
         {
@@ -405,30 +352,15 @@ int generateGaussian(double ** matrix,int mask_size,double sigma)
                matrix[x+t][y+t] = (exp(-(r*r)/s))/(M_PI * s);
 
                 sum += matrix[x+t][y+t];
-
             }
         }
-
-
-
-
-
-
    for(int i = 0; i < mask_size; ++i)
      for(int j = 0; j < mask_size; ++j)
          {
-
               matrix[i][j] = matrix[i][j]/sum;
-
         }
-
-
-
     return 0;
-
-
 }
-
 
 void Picture::imageCopy(int width,int height,Picture image2)
 {
@@ -440,9 +372,6 @@ void Picture::imageCopy(int width,int height,Picture image2)
             color=image2.image.pixel(x,y);
             image.setPixelColor(x,y,color);
          }
-
-
-
 }
 
 QImage Picture::imagePointer()
@@ -452,7 +381,6 @@ QImage Picture::imagePointer()
 
 void Picture::pixelizeFilter(int mask_size)
 {
-
     int r = floor(mask_size/2);
 
     int i,x,y,j,count;
@@ -473,7 +401,6 @@ void Picture::pixelizeFilter(int mask_size)
             weight=0;
             count =0;
 
-
             for(i=0;i<mask_size;i++)
                 for(j=0;j<mask_size;j++)
             {
@@ -488,17 +415,11 @@ void Picture::pixelizeFilter(int mask_size)
                         red=red+qRed(color);
                         green=green+qGreen(color);
                         count++;
-
-                    }
-
+                   }
             }
-
-
-
             blue=floor(blue/(count));
             red=floor(red/(count));
             green=floor(green/(count));
-
 
             for(i=0;i<mask_size;i++)
                 for(j=0;j<mask_size;j++)
@@ -507,13 +428,9 @@ void Picture::pixelizeFilter(int mask_size)
                 if(y-r+i>-1&&y-r+i<width)
                     if(x-r+j>-1 && x-r+j <height)
                     {
-
                         image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
-
                     }
-
             }
-
 
            x+=mask_size;
            if(x>height-1)
@@ -530,47 +447,33 @@ void Picture::pixelizeFilter(int mask_size)
                    if(y-r+i>-1&&y-r+i<width)
                        if(x-r+j>-1 && x-r+j <height)
                        {
-
                            color=image2.image.pixel(y-r+i,x-r+j);
 
                            blue=blue+qBlue(color);
                            red=red+qRed(color);
                            green=green+qGreen(color);
                            count++;
-
                        }
-
                }
-
-
 
                blue=floor(blue/(count));
                red=floor(red/(count));
                green=floor(green/(count));
 
-
                for(i=0;i<mask_size;i++)
                    for(j=0;j<mask_size;j++)
                {
-
                    if(y-r+i>-1&&y-r+i<width)
                        if(x-r+j>-1 && x-r+j <height)
                        {
-
                            image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
-
                        }
-
                }
            }
-
-
-
         }
             y+=mask_size;
             if(y>width-1)
             {
-
                 x=0;
                 while(x<height)
             {
@@ -580,7 +483,6 @@ void Picture::pixelizeFilter(int mask_size)
                 weight=0;
                 count =0;
 
-
                 for(i=0;i<mask_size;i++)
                     for(j=0;j<mask_size;j++)
                 {
@@ -588,7 +490,6 @@ void Picture::pixelizeFilter(int mask_size)
                     if(y-r+i>-1&&y-r+i<width)
                         if(x-r+j>-1 && x-r+j <height)
                         {
-
                             color=image2.image.pixel(y-r+i,x-r+j);
 
                             blue=blue+qBlue(color);
@@ -597,15 +498,11 @@ void Picture::pixelizeFilter(int mask_size)
                             count++;
 
                         }
-
                 }
-
-
 
                 blue=floor(blue/(count));
                 red=floor(red/(count));
                 green=floor(green/(count));
-
 
                 for(i=0;i<mask_size;i++)
                     for(j=0;j<mask_size;j++)
@@ -614,20 +511,13 @@ void Picture::pixelizeFilter(int mask_size)
                     if(y-r+i>-1&&y-r+i<width)
                         if(x-r+j>-1 && x-r+j <height)
                         {
-
                             image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
-
                         }
-
                 }
-
                x+=mask_size;
                if(x>height-1)
                {
-
-
                {
-
                    blue=0;
                    red=0;
                    green=0;
@@ -636,11 +526,9 @@ void Picture::pixelizeFilter(int mask_size)
                    for(i=0;i<mask_size;i++)
                        for(j=0;j<mask_size;j++)
                    {
-
                        if(y-r+i>-1&&y-r+i<width)
                            if(x-r+j>-1 && x-r+j <height)
                            {
-
                                color=image2.image.pixel(y-r+i,x-r+j);
 
                                blue=blue+qBlue(color);
@@ -649,15 +537,11 @@ void Picture::pixelizeFilter(int mask_size)
                                count++;
 
                            }
-
                    }
-
-
 
                    blue=floor(blue/(count));
                    red=floor(red/(count));
                    green=floor(green/(count));
-
 
                    for(i=0;i<mask_size;i++)
                        for(j=0;j<mask_size;j++)
@@ -674,13 +558,9 @@ void Picture::pixelizeFilter(int mask_size)
                    }
                }
                }
-
-
-
             }
         }
         }
-
 
 }
 
@@ -692,18 +572,14 @@ void Picture::medianFilter(int mask_size)
     double blue,red,green,weight;
     QRgb color;
 
-
     double * values_blue;
     values_blue = new double[mask_size*mask_size];
-
 
     double * values_green;
     values_green = new double[mask_size*mask_size];
 
-
     double * values_red;
     values_red = new double[mask_size*mask_size];
-
 
     Picture image2(width,height,this->format());
     image2.imageCopy(width,height,*this);
@@ -732,21 +608,16 @@ void Picture::medianFilter(int mask_size)
                     values_red[count]=qRed(color);
                     count++;
                 }
-
         }
 
         arraySort(values_blue,mask_size*mask_size);
         arraySort(values_green,mask_size*mask_size);
         arraySort(values_red,mask_size*mask_size);
 
-
         cord=ceil(count/2);
         blue=values_blue[cord];
         red=values_red[cord];
         green=values_green[cord];
-
-
-
 
         this->image.setPixelColor(y,x,qRgb(red,green,blue));
     }
@@ -764,7 +635,6 @@ void arraySort(double * values,int size)
     for(i=0;i<size-1;i++)
         for(j=0;j<size-1;j++)
         {
-
             if(values[j+1]<values[j])
             {
 
@@ -772,7 +642,6 @@ void arraySort(double * values,int size)
                 values[j]=values[j+1];
                 values[j+1]=temp;
             }
-
     }
 }
 
