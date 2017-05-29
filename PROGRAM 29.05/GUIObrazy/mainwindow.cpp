@@ -26,7 +26,7 @@ void MainWindow::on_wczytajobraz_clicked()
     {
         Picture before_image;
         before_image = Picture(filename);
-        ui->image1->setPixmap(QPixmap::fromImage(before_image.image));
+        ui->image1->setPixmap(QPixmap::fromImage(before_image.imagePointer()));
 
 
 
