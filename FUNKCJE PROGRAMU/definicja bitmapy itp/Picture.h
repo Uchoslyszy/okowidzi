@@ -32,18 +32,14 @@ class Picture{
         void generateHistogram();
         void printHistogram();
         void contrast (int set);
-        void medianFilter(int mask_size);
-        void pixelizeFilter(int mask_size);
-        int gaussianBlur(int mask_size,double sigma);
-        int equalFilter(int mask_size); //(filter number, size of the mask(has to be an odd number),sigma value(for gaussian blur))
-        /*filters:
-                1. Gaussian blur
-                2. Equal blur
-                3. Pixelize(mask size chooses new pixel size)
-        */
+        void medianFilter(int mask_size);//color values of pixel are median values of pixels nerby
+        void pixelizeFilter(int mask_size);//makes pixels on the image larger mask size determines new pixel size
+        int gaussianBlur(int mask_size,double sigma);//(mask size determines size of filter's matrix, number of pixels that influence, sigma defines gauss curve width)
+        int equalFilter(int mask_size); //(filter using matrix filled with ones, all pixels have equal influence on the output color)
+
 
         void lightening(int scale);//brightness gets scale value added not multiplied
-        void imageCopy(int width, int height, Picture image);
+        void imageCopy(int width, int height, Picture image);//(copies image with its width and height into this)
         int imageOpen(const QString name);//name-path for file to open \ errors:(-1 = cannot open file)
         int imageSave(const QString path);//path-path for file to save in
 
