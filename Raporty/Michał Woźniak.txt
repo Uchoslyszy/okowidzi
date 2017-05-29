@@ -66,4 +66,11 @@ scrum 15.05.2017
 	-Filtr pixelujacy 
 	Dzisiaj:
 	-memgenerator
+
+29.05.2017
+	Wczoraj:
+	-niestety nie mialem czasu na dokonczenie generatora
+	Dzisiaj:
+	-eliminowanie bledow w kodzie i poprawki przed wtorkiem
+
 	

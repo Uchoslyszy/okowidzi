@@ -3,8 +3,7 @@
 #include<stdlib.h>
 #include "imageheader.h"
 #include<math.h>
-
-// pamiętajcie że Picture z dużych liter piszemy :)
+#include<QImage>
 
 
 
@@ -17,6 +16,11 @@ Picture::~Picture()
     if(histogram.green!=NULL)
         delete(histogram.red);
 
+}
+
+Picture::Picture(std::string path)
+{
+    image.op
 }
 
 int Picture::filter(int filter_number,int mask_size)
@@ -201,11 +205,7 @@ void Picture::lightening(int scale)
     }
 }
 
-int Picture::image_create(unsigned int width,unsigned int height)
-{
-    bitmap_image new_image(width,height);
-    image=new_image;
-}
+
 
 int Picture::image_save(std::string path)
 {
