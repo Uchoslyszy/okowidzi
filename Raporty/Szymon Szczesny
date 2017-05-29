@@ -29,3 +29,7 @@
 25.05.2017 :
   DZISIAJ: Zapoznałem się z commitami innych członków zespołu i przeanalizowałem pliki przez nich wrzucone. 
   JUTRO  : Zaprogramuję wyświetlanie histogramów w osobnym okienku.
+29.05.2017 :
+  DZISIAJ: Pracowałem nad połączeniem programu w całość.
+  JUTRO  : Skonsultuję pracę z prowadzącym oraz resztą grupy oraz poprawię wczytywanie obrazka i podpięcie funkcji pod przyciski.
+  TRUDNOŚĆ:setPixmap od klasy Picture gdzie w środku jest użyte QImage
