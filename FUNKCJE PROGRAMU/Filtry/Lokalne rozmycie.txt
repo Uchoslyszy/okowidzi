@@ -1,0 +1,40 @@
+#include <cstdlib>
+#include <iostream>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+using namespace cv;
+using namespace std;
+
+/// Global Variables
+Mat img; 
+int bins = 1;
+/// Function Headers
+void blur(int, void* );
+ 
+int main(){
+  /// Read the image
+  img = imread( "./LENA_512.jpg", 1 );
+  // cvtColor(img, img, CV_BGR2GRAY);
+ 
+  /// Create Trackbar to enter the number of bins
+  char* window_image = "Source image";
+  namedWindow( window_image, CV_WINDOW_AUTOSIZE );
+  createTrackbar("* Blur: ", window_image, &bins, 100, blur );
+  blur(1, 0);
+ 
+  /// Show the image
+  imshow( window_image, img );
+ 
+  /// Wait until user exits the program
+  waitKey(0);
+  return 0;
+}
+ 
+void blur(int, void* ){
+  Mat smoothed_img;
+  blur(img,smoothed_img,Size(2*bins+1,2*bins+1));
+  imshow( "Blur", smoothed_img );
+}

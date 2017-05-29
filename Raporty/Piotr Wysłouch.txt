@@ -40,3 +40,9 @@ Co zrobi³em wczoraj?
 Próba po³¹czenia funkcji z programem.
 Co zrobiê dzisiaj?
 Dalsza praca nad istniej¹cymi funkcjami i rozpoczêcie tworzenia nowych filtrów.
+
+29.05.2017
+Co zrobi³em wczoraj?
+Analiza filtrów z nasz¹ bibliotek¹.
+Co zrobi³em dzisiaj?
+Praca nad reszt¹ funkcji.
