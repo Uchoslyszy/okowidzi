@@ -168,7 +168,7 @@ int Picture::gaussianBlur(int mask_size,double sigma)
             if(y-r+i>-1&&y-r+i<width)
                 if(x-r+j>-1 && x-r+j <height)
                 {
-                    color=image2.image.pixel(y-r+i,x-r+j);
+                    color=image1.image.pixel(y-r+i,x-r+j);
 
                     blue=blue+qBlue(color)*mask[i][j];
                     red=red+qRed(color)*mask[i][j];

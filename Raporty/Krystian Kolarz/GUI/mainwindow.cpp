@@ -24,7 +24,7 @@ void MainWindow::on_wczytajobraz_clicked()
     QString filename = QFileDialog::getOpenFileName(this, tr("Choose"), "", tr("Images (*.bmp)"));
 
     //connect(objekt1,sygnał,obiekt2,slot)
-    connect(ui->tryb1, SIGNAL(clicked()), this, SLOT(wcisniety_przycisk());
+    connect(ui->tryb1, SIGNAL(clicked()), this, SLOT(wcisniety_przycisk()));
 
     if(QString::compare(filename,QString()) != 0)
     {
@@ -45,12 +45,17 @@ void MainWindow::on_tryb1_clicked()
     int x = 2;
     double y = 3;
 
-connect(tryb1,SIGNAL(gaussianBlur(x,y)),image1,)
+
 
 
   // ui ->wczytajobraz -> Picture::gaussianBlur(x,y);
 }
 void MainWindow::wcisniety_przycisk()
 {
+    int x = 2;
+    double y = 3;
 
+  //  QString sciezka = ui->image1;
+
+Picture::gaussianBlur(x,y);
 }
