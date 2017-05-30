@@ -23,6 +23,8 @@ private slots:
 
     void on_tryb1_clicked();
 
+    void wcisniety_przycisk();
+
 private:
     Ui::MainWindow *ui;
 };
