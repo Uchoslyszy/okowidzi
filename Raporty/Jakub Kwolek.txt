@@ -1,3 +1,8 @@
+29.05.2017
+Co zrobiłem wczoraj?
+Poprawki błędów w kodzie
+Co zrobię dzisiaj?
+Będę koordynował linkowanie Pictureh.hpp i Picture.c
 
 27.05.2017
 Co zrobiłem wczoraj?
