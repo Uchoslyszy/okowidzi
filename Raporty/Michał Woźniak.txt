@@ -79,3 +79,11 @@ scrum 15.05.2017
 	Dzisiaj:
 	-Naprawienie crashow programu
 	-ustawnienia proporcji okna
+
+
+31.05.2017
+	Wczoraj:
+	-Naprawienie crashow programu
+	-ustawnienia proporcji okna
+	Dzisiaj:
+	-ustawianie event  listenerow na labele
