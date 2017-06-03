@@ -32,14 +32,14 @@ int MainWindow::on_actionOpen_triggered()
         {
             QScreen *screen = QGuiApplication::primaryScreen();
              QRect  screenGeometry = screen->geometry();
-            int height=0.5*screenGeometry.height();
-            int width=0.5*screenGeometry.width();
+            int height=ui->image1->height();
+            int width=ui->image1->width();
 
             image.imageOpen(filename);
-            int wid=ui->image1->width();
-            int hei=ui->image1->height();
+
             wyswietlenie=QPixmap::fromImage(image.imagePointer());
-            ui->image1->setPixmap(wyswietlenie.scaled(wid,hei,Qt::KeepAspectRatio));
+
+            ui->image1->setPixmap(wyswietlenie.scaled(width,height,Qt::KeepAspectRatio));
 
         }
 }
@@ -56,54 +56,55 @@ void MainWindow::on_actionSave_triggered()
 
 
 
-void MainWindow::on_Gaussian_clicked()
-{
-    image.gaussianBlur(7,3);
-
-    show_();
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    image.pixelizeFilter(20);
-
-    show_();
-
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    image.equalFilter(10);
-
-    show_();
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    image.medianFilter(3);
-
-    show_();
-}
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    image.grayscaling();
-
-    show_();
-}
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    image.contrast(2,5);
-
-    show_();
-}
-
-void MainWindow::show_()
+void MainWindow::imageShow()
 {
     int wid = ui->image1->width();
     int hei = ui->image1->height();
 
+
     wyswietlenie=QPixmap::fromImage(image.imagePointer());
     ui->image1->setPixmap(wyswietlenie.scaled(wid,hei,Qt::KeepAspectRatio));
+}
+
+void MainWindow::on_actionGrayscale_triggered()
+{
+    image.grayscaling();
+
+    imageShow();
+}
+
+void MainWindow::on_actionGaussian_Blur_triggered()
+{
+    image.gaussianBlur(7,3);
+
+    imageShow();
+}
+
+void MainWindow::on_actionEqual_Filter_triggered()
+{
+    image.equalFilter(10);
+
+    imageShow();
+}
+
+void MainWindow::on_actionPixelate_Filter_triggered()
+{
+    image.pixelizeFilter(20);
+
+    imageShow();
+
+}
+
+void MainWindow::on_actionContrast_triggered()
+{
+    image.contrast(2,5);
+
+    imageShow();
+}
+
+void MainWindow::on_actionMedian_Filter_triggered()
+{
+    image.medianFilter(3);
+
+    imageShow();
 }

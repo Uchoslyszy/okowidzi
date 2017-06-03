@@ -13,8 +13,8 @@
 Picture::Picture(const QString name)
 {
     image.load(name);
-    height=image.height();
-    width=image.width();
+    imageHeight=image.height();
+    imageWidth=image.width();
     histogram.blue=new int[256];
     histogram.red=new int[256];
     histogram.green=new int[256];
@@ -27,11 +27,11 @@ Picture::Picture()
     histogram.green=new int[256];
 }
 
-Picture::Picture(int width,int height,QImage::Format format)
+Picture::Picture(int newWidth,int newHeight,QImage::Format format)
 {
-    new (&image)QImage(width,height,format);
-    this->height=image.height();
-    this->width=image.width();
+    new (&image)QImage(newWidth,newHeight,format);
+    this->imageHeight=image.height();
+    this->imageWidth=image.width();
     histogram.blue=new int[256];
     histogram.red=new int[256];
     histogram.green=new int[256];
@@ -52,12 +52,12 @@ Picture::~Picture()
 
 int Picture::getWidth()
 {
-    return width;
+    return imageWidth;
 }
 
 int Picture::getHeight()
 {
-    return height;
+    return imageHeight;
 }
 
 QImage::Format Picture::format()
@@ -74,8 +74,8 @@ int Picture::equalFilter(int mask_size)
 
     QRgb color;
 
-    Picture image2(this->width,this->height,this->format());
-    image2.imageCopy(this->width,this->height,image);
+    Picture image2(this->imageWidth,this->imageHeight,this->format());
+    image2.imageCopy(this->imageWidth,this->imageHeight,image);
 
     double ** mask;
     mask = new double*[mask_size];
@@ -89,8 +89,8 @@ int Picture::equalFilter(int mask_size)
             mask[i][j]=1;
 
 
-    for(y=0;y<width;y++)
-        for(x=0;x<height;x++)
+    for(y=0;y<imageWidth;y++)
+        for(x=0;x<imageHeight;x++)
     {
         blue=0;
         red=0;
@@ -102,8 +102,8 @@ int Picture::equalFilter(int mask_size)
             for(j=0;j<mask_size;j++)
         {
 
-            if(y-r+i>-1&&y-r+i<width)
-                if(x-r+j>-1 && x-r+j <height)
+            if(y-r+i>-1&&y-r+i<imageWidth)
+                if(x-r+j>-1 && x-r+j <imageHeight)
                 {
 
                     color=image2.image.pixel(y-r+i,x-r+j);
@@ -138,8 +138,8 @@ int Picture::imageOpen(const QString name)
 {
 
     image.load(name);
-    height=image.height();
-    width=image.width();
+    imageHeight=image.height();
+    imageWidth=image.width();
     return 0;
 }
 
@@ -168,8 +168,8 @@ int Picture::gaussianBlur(int mask_size,double sigma)
         return -1;
     }
 
-    for(y=0;y<width;y++)
-        for(x=0;x<height;x++)
+    for(y=0;y<imageWidth;y++)
+        for(x=0;x<imageHeight;x++)
     {
         blue=0;
         red=0;
@@ -181,8 +181,8 @@ int Picture::gaussianBlur(int mask_size,double sigma)
             for(j=0;j<mask_size;j++)
         {
 
-            if(y-r+i>-1&&y-r+i<width)
-                if(x-r+j>-1 && x-r+j <height)
+            if(y-r+i>-1&&y-r+i<imageWidth)
+                if(x-r+j>-1 && x-r+j <imageHeight)
                 {
 
                     color=image2.image.pixel(y-r+i,x-r+j);
@@ -222,8 +222,8 @@ void Picture::grayscaling()
     int g;
     float gray;
 
-    for(std::size_t y=0; y<height; y++)
-        for(std::size_t x=0;x<width; x++)
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
     {
 
         color=image.pixel(x,y);
@@ -262,8 +262,8 @@ void Picture::generateHistogram()
 
 
 
-    for(std::size_t y=0; y<height; y++)
-        for(std::size_t x=0;x<width; x++)
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
     {
         QRgb color;
 
@@ -288,8 +288,8 @@ void Picture::lightening(int scale)
     int g;
     int b;
 
-    for(std::size_t y=0; y<height; y++)
-        for(std::size_t x=0;x<width; x++)
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
     {
 
         color=image.pixel(x,y);
@@ -415,15 +415,15 @@ void Picture::pixelizeFilter(int mask_size)
 
     int i,x,y,j,count;
     double blue,red,green,weight;
-    Picture image2(this->width,this->height,image.format());
-    image2.imageCopy(this->width,this->height,image);
+    Picture image2(this->imageWidth,this->imageHeight,image.format());
+    image2.imageCopy(this->imageWidth,this->imageHeight,image);
 
     QRgb color;
         y=0;
-        while(y<width)
+        while(y<imageWidth)
         {
             x=0;
-            while(x<height)
+            while(x<imageHeight)
         {
             blue=0;
             red=0;
@@ -436,8 +436,8 @@ void Picture::pixelizeFilter(int mask_size)
                 for(j=0;j<mask_size;j++)
             {
 
-                if(y-r+i>-1&&y-r+i<width)
-                    if(x-r+j>-1 && x-r+j <height)
+                if(y-r+i>-1&&y-r+i<imageWidth)
+                    if(x-r+j>-1 && x-r+j <imageHeight)
                     {
 
                         color=image2.image.pixel(y-r+i,x-r+j);
@@ -462,8 +462,8 @@ void Picture::pixelizeFilter(int mask_size)
                 for(j=0;j<mask_size;j++)
             {
 
-                if(y-r+i>-1&&y-r+i<width)
-                    if(x-r+j>-1 && x-r+j <height)
+                if(y-r+i>-1&&y-r+i<imageWidth)
+                    if(x-r+j>-1 && x-r+j <imageHeight)
                     {
 
                         image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
@@ -474,7 +474,7 @@ void Picture::pixelizeFilter(int mask_size)
 
 
            x+=mask_size;
-           if(x>height-1)
+           if(x>imageHeight-1)
            {
                blue=0;
                red=0;
@@ -485,8 +485,8 @@ void Picture::pixelizeFilter(int mask_size)
                    for(j=0;j<mask_size;j++)
                {
 
-                   if(y-r+i>-1&&y-r+i<width)
-                       if(x-r+j>-1 && x-r+j <height)
+                   if(y-r+i>-1&&y-r+i<imageWidth)
+                       if(x-r+j>-1 && x-r+j <imageHeight)
                        {
 
                            color=image2.image.pixel(y-r+i,x-r+j);
@@ -511,8 +511,8 @@ void Picture::pixelizeFilter(int mask_size)
                    for(j=0;j<mask_size;j++)
                {
 
-                   if(y-r+i>-1&&y-r+i<width)
-                       if(x-r+j>-1 && x-r+j <height)
+                   if(y-r+i>-1&&y-r+i<imageWidth)
+                       if(x-r+j>-1 && x-r+j <imageHeight)
                        {
 
                            image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
@@ -526,11 +526,11 @@ void Picture::pixelizeFilter(int mask_size)
 
         }
             y+=mask_size;
-            if(y>width-1)
+            if(y>imageWidth-1)
             {
 
                 x=0;
-                while(x<height)
+                while(x<imageHeight)
             {
                 blue=0;
                 red=0;
@@ -543,8 +543,8 @@ void Picture::pixelizeFilter(int mask_size)
                     for(j=0;j<mask_size;j++)
                 {
 
-                    if(y-r+i>-1&&y-r+i<width)
-                        if(x-r+j>-1 && x-r+j <height)
+                    if(y-r+i>-1&&y-r+i<imageWidth)
+                        if(x-r+j>-1 && x-r+j <imageHeight)
                         {
 
                             color=image2.image.pixel(y-r+i,x-r+j);
@@ -569,8 +569,8 @@ void Picture::pixelizeFilter(int mask_size)
                     for(j=0;j<mask_size;j++)
                 {
 
-                    if(y-r+i>-1&&y-r+i<width)
-                        if(x-r+j>-1 && x-r+j <height)
+                    if(y-r+i>-1&&y-r+i<imageWidth)
+                        if(x-r+j>-1 && x-r+j <imageHeight)
                         {
 
                             image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
@@ -580,7 +580,7 @@ void Picture::pixelizeFilter(int mask_size)
                 }
 
                x+=mask_size;
-               if(x>height-1)
+               if(x>imageHeight-1)
                {
 
 
@@ -595,8 +595,8 @@ void Picture::pixelizeFilter(int mask_size)
                        for(j=0;j<mask_size;j++)
                    {
 
-                       if(y-r+i>-1&&y-r+i<width)
-                           if(x-r+j>-1 && x-r+j <height)
+                       if(y-r+i>-1&&y-r+i<imageWidth)
+                           if(x-r+j>-1 && x-r+j <imageHeight)
                            {
 
                                color=image2.image.pixel(y-r+i,x-r+j);
@@ -621,8 +621,8 @@ void Picture::pixelizeFilter(int mask_size)
                        for(j=0;j<mask_size;j++)
                    {
 
-                       if(y-r+i>-1&&y-r+i<width)
-                           if(x-r+j>-1 && x-r+j <height)
+                       if(y-r+i>-1&&y-r+i<imageWidth)
+                           if(x-r+j>-1 && x-r+j <imageHeight)
                            {
 
                                image.setPixelColor(y-r+i,x-r+j,qRgb(red,green,blue));
@@ -663,11 +663,11 @@ void Picture::medianFilter(int mask_size)
     values_red = new double[mask_size*mask_size];
 
 
-    Picture image2(width,height,this->format());
-    image2.imageCopy(width,height,image);
+    Picture image2(imageWidth,imageHeight,this->format());
+    image2.imageCopy(imageWidth,imageHeight,image);
 
-    for(y=0;y<width;y++)
-        for(x=0;x<height;x++)
+    for(y=0;y<imageWidth;y++)
+        for(x=0;x<imageHeight;x++)
     {
         blue=0;
         red=0;
@@ -679,8 +679,8 @@ void Picture::medianFilter(int mask_size)
             for(j=0;j<mask_size;j++)
         {
 
-            if(y-r+i>-1&&y-r+i<width)
-                if(x-r+j>-1 && x-r+j <height)
+            if(y-r+i>-1&&y-r+i<imageWidth)
+                if(x-r+j>-1 && x-r+j <imageHeight)
                 {
 
                     color=image2.image.pixel(y-r+i,x-r+j);
@@ -721,8 +721,8 @@ void Picture::contrast (int set,int scale)
     int b;
 
 
-    for(std::size_t y=0; y<height; y++)
-        for(std::size_t x=0;x<width; x++)
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
     {
 
         color=image.pixel(x,y);
