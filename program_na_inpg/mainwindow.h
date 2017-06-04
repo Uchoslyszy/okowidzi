@@ -24,19 +24,21 @@ private slots:
 
     void on_actionSave_triggered();
 
-    void on_Gaussian_clicked();
+    void imageShow();
 
-    void on_pushButton_clicked();
+    void on_actionGrayscale_triggered();
 
-    void on_pushButton_2_clicked();
+    void on_actionGaussian_Blur_triggered();
 
-    void on_pushButton_3_clicked();
+    void on_actionEqual_Filter_triggered();
 
-    void on_pushButton_4_clicked();
+    void on_actionPixelate_Filter_triggered();
 
-    void on_pushButton_5_clicked();
+    void on_actionContrast_triggered();
 
-    void show_();
+    void on_actionMedian_Filter_triggered();
+
+    void on_actionLighten_triggered();
 
 private:
     QPixmap wyswietlenie;
