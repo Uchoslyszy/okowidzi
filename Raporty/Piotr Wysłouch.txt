@@ -46,3 +46,9 @@ Co zrobi³em wczoraj?
 Analiza filtrów z nasz¹ bibliotek¹.
 Co zrobi³em dzisiaj?
 Praca nad reszt¹ funkcji.
+
+01.06.2017
+Co zrobi³em wczoraj/przedwczoraj?
+Spotkanie z reszt¹ zespo³u i wspólna praca nad popraw¹ funkcjonalnoœci programu.
+Co zrobiê dzisiaj?
+Zapoznanie siê z uaktualnionym kodem innych cz³onków.

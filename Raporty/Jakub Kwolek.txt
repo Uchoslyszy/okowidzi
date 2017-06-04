@@ -1,3 +1,21 @@
+1.06.2017
+Co zrobiłem wczoraj?
+Pomyślnie usunąłem pomyłki z kodu.
+Co zrobię dzisiaj?
+Poczekam na implementację zmian do GUI
+
+31.05.2017
+Co zrobiłem wczoraj?
+Przemianowanie zmiennych w programie
+Co zrobię dzisiaj?
+Debugowanie kodu pod kątem ew. pomyłek
+
+30.05.2017
+Co zrobiłem wczoraj?
+Przyglądałem się z bezsilnością jak program nie działa
+Co zrobię dzisiaj?
+Idąc za radą konsultanta (p. Artura Pańszczyka) zacznę wprowadzać z zespołem poprawki do programu.
+
 29.05.2017
 Co zrobiłem wczoraj?
 Poprawki błędów w kodzie
