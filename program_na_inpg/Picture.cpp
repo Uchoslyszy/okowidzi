@@ -697,12 +697,20 @@ void Picture::medianFilter(int mask_size)
         arraySort(values_green,mask_size*mask_size);
         arraySort(values_red,mask_size*mask_size);
 
-
-        cord=ceil(count/2);
-        blue=values_blue[cord];
-        red=values_red[cord];
-        green=values_green[cord];
-
+        if(count%2==0)
+        {
+            cord=ceil(count/2);
+            blue=(values_blue[cord]+values_blue[cord+1])/2;
+            red=(values_red[cord]+values_red[cord+1])/2;
+            green=(values_green[cord]+values_green[cord+1])/2;
+        }
+        else
+        {
+            cord=ceil(count/2);
+            blue=values_blue[cord];
+            red=values_red[cord];
+            green=values_green[cord];
+        }
 
 
 
