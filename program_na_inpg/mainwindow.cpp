@@ -6,6 +6,7 @@
 #include "QFileDialog"
 #include "QRect"
 #include "QScreen"
+#include "QSlider"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -68,6 +69,7 @@ void MainWindow::imageShow()
 
 void MainWindow::on_actionGrayscale_triggered()
 {
+
     image.grayscaling();
 
     imageShow();
@@ -82,6 +84,7 @@ void MainWindow::on_actionGaussian_Blur_triggered()
 
 void MainWindow::on_actionEqual_Filter_triggered()
 {
+
     image.equalFilter(10);
 
     imageShow();
@@ -89,6 +92,8 @@ void MainWindow::on_actionEqual_Filter_triggered()
 
 void MainWindow::on_actionPixelate_Filter_triggered()
 {
+
+
     image.pixelizeFilter(20);
 
     imageShow();
@@ -108,3 +113,5 @@ void MainWindow::on_actionMedian_Filter_triggered()
 
     imageShow();
 }
+
+
