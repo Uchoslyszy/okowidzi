@@ -3,7 +3,6 @@
 #include "Picture.h"
 #include <QMainWindow>
 #include <QPixmap>
-#include <QSlider>
 
 
 
@@ -39,7 +38,7 @@ private slots:
 
     void on_actionMedian_Filter_triggered();
 
-
+    void on_actionLighten_triggered();
 
 private:
     QPixmap wyswietlenie;

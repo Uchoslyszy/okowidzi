@@ -54,6 +54,7 @@
     <addaction name="actionGrayscale"/>
     <addaction name="actionContrast"/>
     <addaction name="actionGaussian_Blur"/>
+    <addaction name="actionLighten"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -105,6 +106,11 @@
   <action name="actionGaussian_Blur">
    <property name="text">
     <string>Gaussian Blur</string>
+   </property>
+  </action>
+  <action name="actionLighten">
+   <property name="text">
+    <string>Lighten</string>
    </property>
   </action>
  </widget>

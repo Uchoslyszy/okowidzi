@@ -6,7 +6,8 @@
 #include "QFileDialog"
 #include "QRect"
 #include "QScreen"
-#include "QSlider"
+#include "QInputDialog"
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,13 +34,15 @@ int MainWindow::on_actionOpen_triggered()
         {
             QScreen *screen = QGuiApplication::primaryScreen();
              QRect  screenGeometry = screen->geometry();
-            int height=ui->image1->height();
-            int width=ui->image1->width();
+            int height=0.9*screenGeometry.height();
+            int width=0.9*screenGeometry.width();
 
             image.imageOpen(filename);
 
             wyswietlenie=QPixmap::fromImage(image.imagePointer());
-
+            if(this->width()<width || this->height()<height)
+                this->resize(width,height);
+            ui->image1->resize(width,height);
             ui->image1->setPixmap(wyswietlenie.scaled(width,height,Qt::KeepAspectRatio));
 
         }
@@ -69,7 +72,6 @@ void MainWindow::imageShow()
 
 void MainWindow::on_actionGrayscale_triggered()
 {
-
     image.grayscaling();
 
     imageShow();
@@ -77,24 +79,64 @@ void MainWindow::on_actionGrayscale_triggered()
 
 void MainWindow::on_actionGaussian_Blur_triggered()
 {
-    image.gaussianBlur(7,3);
+    int   mask_size=2;
+    double sigma;
+    bool ok;
+
+
+    mask_size=QInputDialog::getInt(this, tr("Gaussian Blur"),tr("Mask Size(has to be an odd number: "),QLineEdit::Normal,3,29,1,&ok);
+
+    if(mask_size%2==0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Mask size wasn't odd");
+        msgBox.exec();
+        return;
+    }
+
+    if(!ok)
+        return;
+
+    sigma=QInputDialog::getDouble(this,tr("Sigma Value"),tr("Sigma: "),QLineEdit::Normal,0,10,4,&ok);
+    if(!ok)
+        return;
+
+    image.gaussianBlur(mask_size,sigma);
 
     imageShow();
 }
 
 void MainWindow::on_actionEqual_Filter_triggered()
 {
+    int mask_size=2;
+    bool ok;
 
-    image.equalFilter(10);
+    mask_size=QInputDialog::getInt(this, tr("Equal filter"),tr("Mask Size(has to be an odd number: "),QLineEdit::Normal,3,29,1,&ok);
+    if(mask_size%2==0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Mask size wasn't odd");
+        msgBox.exec();
+        return;
+    }
+
+    if(!ok)
+        return;
+
+    image.equalFilter(mask_size);
 
     imageShow();
 }
 
 void MainWindow::on_actionPixelate_Filter_triggered()
 {
+    int pixel_size;
+    bool ok;
+    pixel_size=QInputDialog::getInt(this,tr("Pixelate Filter"),tr("New Pixel Size: "),QLineEdit::Normal,1,1000,1,&ok);
+    if(!ok)
+        return;
 
-
-    image.pixelizeFilter(20);
+    image.pixelizeFilter(pixel_size);
 
     imageShow();
 
@@ -102,16 +144,50 @@ void MainWindow::on_actionPixelate_Filter_triggered()
 
 void MainWindow::on_actionContrast_triggered()
 {
-    image.contrast(2,5);
+    int value1,value2;
+    bool ok;
+    value1=QInputDialog::getInt(this,tr(" "),tr(" "),QLineEdit::Normal,1,1000,1,&ok);
+    if(!ok)
+        return;
+    value2=QInputDialog::getInt(this,tr(" "),tr(" "),QLineEdit::Normal,1,1000,1,&ok);
+    if(!ok)
+        return;
+
+    image.contrast(value1,value2);
 
     imageShow();
 }
 
 void MainWindow::on_actionMedian_Filter_triggered()
 {
-    image.medianFilter(3);
+    bool ok;
+    int mask_size=2;
+
+    mask_size=QInputDialog::getInt(this, tr("Median Filter"),tr("Mask Size(has to be an odd number: "),QLineEdit::Normal,3,29,1,&ok);
+    if(mask_size%2==0)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Mask size wasn't odd");
+        msgBox.exec();
+        return;
+    }
+
+    if(!ok)
+        return;
+    image.medianFilter(mask_size);
 
     imageShow();
 }
 
+void MainWindow::on_actionLighten_triggered()
+{
+    bool ok;
+    int steps;
+    steps=QInputDialog::getInt(this,tr("Lighten"),tr("Number of steps to lighten the image: "),QLineEdit::Normal,-256,256,1,&ok);
+    if(!ok)
+        return;
 
+    image.lightening(steps);
+    imageShow();
+
+}
