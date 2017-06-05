@@ -451,8 +451,6 @@ void Picture::pixelizeFilter(int mask_size)
 
             }
 
-
-
             blue=floor(blue/(count));
             red=floor(red/(count));
             green=floor(green/(count));
@@ -721,7 +719,7 @@ void Picture::medianFilter(int mask_size)
     delete(values_red);
 }
 
-void Picture::contrast (double set)
+void Picture::contrast (double scale)
 {
     QRgb color;
     int r;
@@ -735,27 +733,48 @@ void Picture::contrast (double set)
 
         color=image.pixel(x,y);
 
-        if (set*(qRed(color)-127)+127<=255 &&  set*(qRed(color)-127)+127>0)
-        r = set*(qRed(color)-127)+127;
-        else if (set*(qRed(color)-127)+127>255) r= 255;
+        if (scale*(qRed(color)-127)+127<=255 &&  scale*(qRed(color)-127)+127>0)
+        r = scale*(qRed(color)-127)+127;
+        else if (scale*(qRed(color)-127)+127>255) r= 255;
         else r=0;
 
-        if (set*(qBlue(color)-127)+127<=255 &&  set*(qBlue(color)-127)+127>0)
-        b = set*(qBlue(color)-127)+127;
-        else if (set*(qBlue(color)-127)+127>255) b= 255;
+        if (scale*(qBlue(color)-127)+127<=255 &&  scale*(qBlue(color)-127)+127>0)
+        b = scale*(qBlue(color)-127)+127;
+        else if (scale*(qBlue(color)-127)+127>255) b= 255;
         else b=0;
 
 
-        if (set*(qGreen(color)-127)+127<=255 &&  set*(qGreen(color)-127)+127>0)
-        g = set*(qGreen(color)-127)+127;
-        else if (set*(qGreen(color)-127)+127>255) g= 255;
+        if (scale*(qGreen(color)-127)+127<=255 &&  scale*(qGreen(color)-127)+127>0)
+        g = scale*(qGreen(color)-127)+127;
+        else if (scale*(qGreen(color)-127)+127>255) g= 255;
         else g=0;
 
         image.setPixelColor(x,y,qRgb(r,g,b));
-
-
     }
 }
+
+void Picture::negative ()
+{
+    QRgb color;
+    int r;
+    int g;
+    int b;
+
+
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
+    {
+
+        color=image.pixel(x,y);
+
+        r=255-r;
+        g=255-g;
+        b=255-b;
+
+        image.setPixelColor(x,y,qRgb(r,g,b));
+    }
+}
+
 
 void arraySort(double * values,int size)
 {
