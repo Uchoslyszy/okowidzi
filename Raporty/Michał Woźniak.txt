@@ -87,3 +87,29 @@ scrum 15.05.2017
 	-ustawnienia proporcji okna
 	Dzisiaj:
 	-ustawianie event  listenerow na labele
+
+1.06.2017
+	Wczoraj:
+	-proby przesuwania labeli po oknie programu
+	Dzisiaj:
+	-Intergracja wyswietlania histogramu
+
+2.06.2017
+	Wczoraj:
+	-integracja wyswietlania histogramu
+	Dzisiaj
+	-Funkcja Sharpen
+	-Dostosowywanie okna do monitora
+
+05.06.2017
+	
+	Ostatnio:
+	-Funkcja Sharpen
+	-Dostosowywanie okna do monitora
+	Dzisiaj:
+	-Input boxy dla rozmiarow masek
+	-Funkcja edge detection
+	-
+
+
+
