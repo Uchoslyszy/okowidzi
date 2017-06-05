@@ -775,6 +775,26 @@ void Picture::negative ()
     }
 }
 
+void Picture::gammaFilter (float gamma)
+{
+    QRgb color;
+    int r;
+    int g;
+    int b;
+
+    for(std::size_t y=0; y<imageHeight; y++)
+        for(std::size_t x=0;x<imageWidth; x++)
+    {
+
+        color=image.pixel(x,y);
+
+        r=255*pow(r/255,1/gamma);
+        g=255*pow(g/255,1/gamma);
+        b=255*pow(b/255,1/gamma);
+
+        image.setPixelColor(x,y,qRgb(r,g,b));
+    }
+}
 
 void arraySort(double * values,int size)
 {
