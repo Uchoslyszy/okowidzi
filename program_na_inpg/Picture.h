@@ -37,7 +37,7 @@ class Picture{
         int gaussianBlur(int mask_size,double sigma);
         int equalFilter(int mask_size); //size of the mask(should be an odd number)
         void negative ();
-
+        void gammaFilter(float gamma);
         void lightening(int scale);//brightness gets scale value added not multiplied
         void imageCopy(int imageWidth, int imageHeight,QImage image);
         int imageOpen(const QString name);//name-path for file to open \ errors:(-1 = cannot open file)
