@@ -31,12 +31,12 @@ class Picture{
         void grayscaling();
         void generateHistogram();
         void printHistogram();
-        void contrast (int set,int scale);
+        void contrast (double scale);
         void medianFilter(int mask_size);
         void pixelizeFilter(int mask_size);
         int gaussianBlur(int mask_size,double sigma);
         int equalFilter(int mask_size); //size of the mask(should be an odd number)
-
+        void negative ();
 
         void lightening(int scale);//brightness gets scale value added not multiplied
         void imageCopy(int imageWidth, int imageHeight,QImage image);
