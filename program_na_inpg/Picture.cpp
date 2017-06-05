@@ -735,20 +735,20 @@ void Picture::contrast (int set,int scale)
 
         color=image.pixel(x,y);
 
-        if (set*(qRed(color)-178)+178<=255 &&  set*(qRed(color)-178)+178>0)
-        r = set*(qRed(color)-178)+178;
-        else if (qRed(color)+scale>255) r= 255;
+        if (set*(qRed(color)-127)+127<=255 &&  set*(qRed(color)-127)+127>0)
+        r = set*(qRed(color)-127)+127;
+        else if (set*(qRed(color)-127)+127>255) r= 255;
         else r=0;
 
-        if (set*(qBlue(color)-178)+178<=255 &&  set*(qBlue(color)-178)+178>0)
-        b = set*(qBlue(color)-178)+178;
-        else if (qBlue(color)+scale>255) b= 255;
+        if (set*(qBlue(color)-127)+127<=255 &&  set*(qBlue(color)-127)+127>0)
+        b = set*(qBlue(color)-127)+127;
+        else if (set*(qBlue(color)-127)+127>255) b= 255;
         else b=0;
 
 
-        if (set*(qGreen(color)-178)+178<=255 &&  set*(qGreen(color)-178)+178>0)
-        g = set*(qGreen(color)-178)+178;
-        else if (qGreen(color)+scale>255) g= 255;
+        if (set*(qGreen(color)-127)+127<=255 &&  set*(qGreen(color)-127)+127>0)
+        g = set*(qGreen(color)-127)+127;
+        else if (set*(qGreen(color)-127)+127>255) g= 255;
         else g=0;
 
         image.setPixelColor(x,y,qRgb(r,g,b));
