@@ -6,7 +6,8 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Program_na_inpg
 TEMPLATE = app
@@ -25,9 +26,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Picture.cpp
+    Picture.cpp \
+    qcustomplot.cpp \
+    histogram.cpp
 
 HEADERS  += mainwindow.h \
-    Picture.h
+    Picture.h \
+    qcustomplot.h \
+    histogram.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    histogram.ui \
+
+
+DISTFILES +=

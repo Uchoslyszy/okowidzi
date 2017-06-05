@@ -20,7 +20,7 @@ public:
     ~MainWindow();
 
 private slots:
-    int on_actionOpen_triggered();
+    void on_actionOpen_triggered();
 
     void on_actionSave_triggered();
 
@@ -39,6 +39,14 @@ private slots:
     void on_actionMedian_Filter_triggered();
 
     void on_actionLighten_triggered();
+
+    void on_actionHistogram_triggered();
+
+    void on_actionNegative_triggered();
+
+    void on_actionSharpen_triggered();
+
+    void on_actionEdge_Detection_triggered();
 
 private:
     QPixmap wyswietlenie;

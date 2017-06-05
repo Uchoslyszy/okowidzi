@@ -1,13 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "histogram.h"
 
 #include "Picture.h"
 #include "QFileDialog"
 #include "QRect"
 #include "QScreen"
+
 #include "QInputDialog"
 #include "QMessageBox"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,12 +23,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 
-
-
 }
 
 
-int MainWindow::on_actionOpen_triggered()
+void MainWindow::on_actionOpen_triggered()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Choose"), "", tr("Images (*.bmp)"));
 
@@ -38,6 +38,7 @@ int MainWindow::on_actionOpen_triggered()
             int width=0.9*screenGeometry.width();
 
             image.imageOpen(filename);
+            image.generateHistogram();
 
             wyswietlenie=QPixmap::fromImage(image.imagePointer());
             if(this->width()<width || this->height()<height)
@@ -73,7 +74,7 @@ void MainWindow::imageShow()
 void MainWindow::on_actionGrayscale_triggered()
 {
     image.grayscaling();
-
+    image.generateHistogram();
     imageShow();
 }
 
@@ -102,8 +103,8 @@ void MainWindow::on_actionGaussian_Blur_triggered()
         return;
 
     image.gaussianBlur(mask_size,sigma);
-
     imageShow();
+    image.generateHistogram();
 }
 
 void MainWindow::on_actionEqual_Filter_triggered()
@@ -124,8 +125,8 @@ void MainWindow::on_actionEqual_Filter_triggered()
         return;
 
     image.equalFilter(mask_size);
-
     imageShow();
+    image.generateHistogram();
 }
 
 void MainWindow::on_actionPixelate_Filter_triggered()
@@ -137,25 +138,25 @@ void MainWindow::on_actionPixelate_Filter_triggered()
         return;
 
     image.pixelizeFilter(pixel_size);
-
     imageShow();
+    image.generateHistogram();
 
 }
 
 void MainWindow::on_actionContrast_triggered()
 {
-    int value1,value2;
+    double value1;
     bool ok;
-    value1=QInputDialog::getInt(this,tr(" "),tr(" "),QLineEdit::Normal,1,1000,1,&ok);
-    if(!ok)
-        return;
-    value2=QInputDialog::getInt(this,tr(" "),tr(" "),QLineEdit::Normal,1,1000,1,&ok);
+
+    value1=QInputDialog::getDouble(this, tr("Contrast"),tr("Contrast Value: "),QLineEdit::Normal,0,1000,4,&ok);
     if(!ok)
         return;
 
-    image.contrast(value1,value2);
 
+
+    image.contrast(value1);
     imageShow();
+    image.generateHistogram();
 }
 
 void MainWindow::on_actionMedian_Filter_triggered()
@@ -175,8 +176,8 @@ void MainWindow::on_actionMedian_Filter_triggered()
     if(!ok)
         return;
     image.medianFilter(mask_size);
-
     imageShow();
+    image.generateHistogram();
 }
 
 void MainWindow::on_actionLighten_triggered()
@@ -189,5 +190,36 @@ void MainWindow::on_actionLighten_triggered()
 
     image.lightening(steps);
     imageShow();
+    image.generateHistogram();
 
+}
+
+void MainWindow::on_actionHistogram_triggered()
+{
+    Histogram *histogram=new Histogram(this,image.histogramBlue(),image.histogramRed(),image.histogramGreen());
+    histogram->setGeometry(500,500,400,300);
+    histogram->setFixedSize(400,300);
+    histogram->setWindowTitle("Histogram");
+    histogram->show();
+}
+
+void MainWindow::on_actionNegative_triggered()
+{
+    image.negative();
+    imageShow();
+    image.generateHistogram();
+}
+
+void MainWindow::on_actionSharpen_triggered()
+{
+    image.sharpen();
+    imageShow();
+    image.generateHistogram();
+}
+
+void MainWindow::on_actionEdge_Detection_triggered()
+{
+    image.edgeDetection();
+    imageShow();
+    image.generateHistogram();
 }

@@ -34,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>1394</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -55,9 +55,19 @@
     <addaction name="actionContrast"/>
     <addaction name="actionGaussian_Blur"/>
     <addaction name="actionLighten"/>
+    <addaction name="actionNegative"/>
+    <addaction name="actionSharpen"/>
+    <addaction name="actionEdge_Detection"/>
+   </widget>
+   <widget class="QMenu" name="menuShow_Histogram">
+    <property name="title">
+     <string>Show Histogram</string>
+    </property>
+    <addaction name="actionHistogram"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuShow_Histogram"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -75,7 +85,7 @@
   </action>
   <action name="actionEqual_Filter">
    <property name="text">
-    <string>Equal Filter</string>
+    <string>Box Blur</string>
    </property>
   </action>
   <action name="actionPixelate_Filter">
@@ -111,6 +121,26 @@
   <action name="actionLighten">
    <property name="text">
     <string>Lighten</string>
+   </property>
+  </action>
+  <action name="actionHistogram">
+   <property name="text">
+    <string>Histogram</string>
+   </property>
+  </action>
+  <action name="actionNegative">
+   <property name="text">
+    <string>Negative</string>
+   </property>
+  </action>
+  <action name="actionSharpen">
+   <property name="text">
+    <string>Sharpen</string>
+   </property>
+  </action>
+  <action name="actionEdge_Detection">
+   <property name="text">
+    <string>Edge Detection</string>
    </property>
   </action>
  </widget>
