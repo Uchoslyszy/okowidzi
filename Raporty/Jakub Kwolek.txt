@@ -1,3 +1,15 @@
+5.06.2017
+Co zrobiłęm wczoraj?
+Imprezowałem bo weekend
+Co zrobię dzisiaj?
+Naprawię funkcję kontrastu
+
+2.06.2017
+Co zrobiłęm wczoraj?
+Implementacja zmian pokazała błędy w przetwarzaniu wprowadzonych danych
+Co zrobię dzisiaj?
+Spróbuję naprawić te błędy.
+
 1.06.2017
 Co zrobiłem wczoraj?
 Pomyślnie usunąłem pomyłki z kodu.
