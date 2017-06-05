@@ -767,9 +767,9 @@ void Picture::negative ()
 
         color=image.pixel(x,y);
 
-        r=255-r;
-        g=255-g;
-        b=255-b;
+        r=255-qRed(color);
+        g=255-qGreen(color);
+        b=255-qBlue(color);
 
         image.setPixelColor(x,y,qRgb(r,g,b));
     }
@@ -788,9 +788,9 @@ void Picture::gammaFilter (float gamma)
 
         color=image.pixel(x,y);
 
-        r=255*pow(r/255,1/gamma);
-        g=255*pow(g/255,1/gamma);
-        b=255*pow(b/255,1/gamma);
+        r=255*pow(qRed(color)/255,1/gamma);
+        g=255*pow(qGreen(color)/255,1/gamma);
+        b=255*pow(qBlue(color)/255,1/gamma);
 
         image.setPixelColor(x,y,qRgb(r,g,b));
     }
