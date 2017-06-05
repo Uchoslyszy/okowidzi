@@ -721,7 +721,7 @@ void Picture::medianFilter(int mask_size)
     delete(values_red);
 }
 
-void Picture::contrast (int set,int scale)
+void Picture::contrast (double set)
 {
     QRgb color;
     int r;
