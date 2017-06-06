@@ -1,3 +1,9 @@
+6.06.2017
+Co zrobiłem wczoraj?
+Naprawiłem błędy w funkcji kontrastu oraz mniejsze błędy składniowe w innych funkcjach
+Co zrobię dzisiaj?
+Dopiszę funkcję gamma oraz negatyw.
+
 5.06.2017
 Co zrobiłęm wczoraj?
 Imprezowałem bo weekend
